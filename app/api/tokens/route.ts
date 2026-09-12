@@ -4,10 +4,12 @@ import {AURA_COLLECTION_ABI} from "../../lib/aura-contract";
 
 const CONTRACT=process.env.NEXT_PUBLIC_AURA_NFT_CONTRACT||"";
 const LEGACY_CONTRACT=process.env.NEXT_PUBLIC_AURA_LEGACY_NFT_CONTRACT||"";
-const RPC="https://rpc.mainnet.chain.robinhood.com";
+const RPC=process.env.AURA_RPC_URL||"https://rpc.mainnet.chain.robinhood.com";
 const IPFS_GATEWAY="https://gateway.pinata.cloud/ipfs/";
 
 export const dynamic="force-dynamic";
+export const runtime="nodejs";
+export const maxDuration=60;
 
 function gatewayUrl(uri:string){return uri.startsWith("ipfs://")?`${IPFS_GATEWAY}${uri.slice(7)}`:uri}
 

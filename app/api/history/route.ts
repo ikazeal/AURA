@@ -4,11 +4,13 @@ import {AURA_COLLECTION_ABI} from "../../lib/aura-contract";
 
 const CONTRACT=process.env.NEXT_PUBLIC_AURA_NFT_CONTRACT||"";
 const LEGACY_CONTRACT=process.env.NEXT_PUBLIC_AURA_LEGACY_NFT_CONTRACT||"";
-const RPC="https://rpc.mainnet.chain.robinhood.com";
+const RPC=process.env.AURA_RPC_URL||"https://rpc.mainnet.chain.robinhood.com";
 const DEPLOYMENT_BLOCK=Number(process.env.NEXT_PUBLIC_AURA_DEPLOYMENT_BLOCK||60267053);
 const LEGACY_DEPLOYMENT_BLOCK=Number(process.env.NEXT_PUBLIC_AURA_LEGACY_DEPLOYMENT_BLOCK||60267053);
 
 export const dynamic="force-dynamic";
+export const runtime="nodejs";
+export const maxDuration=60;
 
 async function readContractHistory(provider:JsonRpcProvider,wallet:string,address:string,fromBlock:number,version:string){
   const contract=new Contract(address,AURA_COLLECTION_ABI,provider);

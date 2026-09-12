@@ -1,16 +1,31 @@
 import assert from "node:assert/strict";
+import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
-import test from "node:test";
+import test, { after } from "node:test";
+
+const port = 3400 + (process.pid % 500);
+const origin = `http://127.0.0.1:${port}`;
+const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "-p", String(port)], {
+  cwd: new URL("..", import.meta.url),
+  stdio: ["ignore", "pipe", "pipe"],
+});
+
+async function waitForServer() {
+  for (let attempt = 0; attempt < 80; attempt++) {
+    try {
+      const response = await fetch(origin);
+      if (response.ok) return;
+    } catch {}
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+  throw new Error("Next.js test server did not start");
+}
+
+await waitForServer();
+after(() => server.kill());
 
 async function render(path = "/") {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${path}`);
-  const { default: worker } = await import(workerUrl.href);
-  return worker.fetch(
-    new Request(`http://localhost${path}`, { headers: { accept: "text/html" } }),
-    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
-    { waitUntil() {}, passThroughOnException() {} },
-  );
+  return fetch(`${origin}${path}`, { headers: { accept: "text/html" } });
 }
 
 test("server-renders the AURA product and studio", async () => {

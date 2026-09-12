@@ -1,5 +1,9 @@
 import {AbiCoder,Contract,JsonRpcProvider,Wallet,isAddress,keccak256,verifyMessage} from "ethers";
 
+export const runtime="nodejs";
+export const maxDuration=300;
+export const dynamic="force-dynamic";
+
 const MAX_FILES=50;
 const MAX_FILE_BYTES=30*1024*1024;
 const SIGNATURE_TTL_MS=5*60*1000;

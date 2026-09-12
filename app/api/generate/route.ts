@@ -9,6 +9,10 @@ const MAX_REFERENCE_BYTES=12*1024*1024;
 const WINDOW_MS=10*60*1000;
 const MAX_WEIGHT_PER_WINDOW=24;
 
+export const runtime="nodejs";
+export const maxDuration=300;
+export const dynamic="force-dynamic";
+
 type GenerateRequest={
   mode?:"subject"|"collection";
   prompt?:string;
@@ -44,7 +48,9 @@ function providerName(){return process.env.AURA_AI_PROVIDER||(/quickrouter/i.tes
 function imageApiUrl(path:"generations"|"edits"){return `${apiBaseUrl()}/images/${path}`}
 
 async function imageProviderFetch(path:"generations"|"edits",init:RequestInit){
-  const proxy=process.env.AURA_AI_PROXY_URL?.replace(/\/$/,"");
+  // The helper proxy only exists on the Windows development machine. Vercel
+  // Functions must call the configured image provider directly.
+  const proxy=process.env.VERCEL?"":process.env.AURA_AI_PROXY_URL?.replace(/\/$/,"");
   if(!proxy)return fetch(imageApiUrl(path),init);
   const headers=new Headers(init.headers);headers.delete("Authorization");
   return fetch(`${proxy}/v1/images/${path}`,{...init,headers});

@@ -3,7 +3,7 @@ import {resolve} from "node:path";
 
 const env={...process.env,WRANGLER_LOG_PATH:process.env.WRANGLER_LOG_PATH||".wrangler/wrangler.log"};
 const gateway=spawn(process.execPath,[resolve("scripts/quickrouter-proxy.mjs")],{env,stdio:"inherit"});
-const site=spawn(process.execPath,[resolve("node_modules/vinext/dist/cli.js"),"dev"],{env,stdio:"inherit"});
+const site=spawn(process.execPath,[resolve("node_modules/next/dist/bin/next"),"dev"],{env,stdio:"inherit"});
 
 let closing=false;
 function close(code=0){if(closing)return;closing=true;gateway.kill();site.kill();setTimeout(()=>process.exit(code),250)}

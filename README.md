@@ -16,8 +16,8 @@ AURA 是面向 Robinhood Chain 的 AI NFT Collection 创作与发行平台。用
 
 ## 技术栈
 
-- React 19 / Vinext / Vite
-- Cloudflare Workers compatible API routes
+- Next.js 16 App Router / React 19
+- Vercel Node.js Functions（AI、IPFS、链上数据）
 - ethers.js
 - Solidity / OpenZeppelin
 - Pinata IPFS
@@ -67,6 +67,19 @@ npm run contract:compile
 ```
 
 当前自动化测试覆盖页面渲染、Robinhood 网络锁定、零平台服务费、授权 Mint、OpenSea 引导和服务端 AI 生成调用。
+
+## Vercel 部署
+
+项目已包含 `vercel.json`，Framework Preset 使用 **Next.js**。在 Vercel 项目中添加上面的运行时变量后即可部署；不要添加本机专用的 `AURA_AI_PROXY_URL` 或 `AURA_OUTBOUND_PROXY`，生产环境会直接请求 QuickRouter。
+
+生产环境需要额外配置：
+
+```ini
+AURA_RPC_URL=https://rpc.mainnet.chain.robinhood.com
+AURA_MINT_AUTHORIZER_PRIVATE_KEY=YOUR_SERVER_SIDE_AUTHORIZER_KEY
+```
+
+`AURA_DEPLOYER_PRIVATE_KEY` 和 `AURA_DEPLOY_*` 只用于管理员执行合约部署，**不要**保存到 Vercel 运行时环境。
 
 ## 安全说明
 
