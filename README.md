@@ -26,7 +26,7 @@ AURA 是面向 Robinhood Chain 的 AI NFT Collection 创作与发行平台。用
 
 ## 本地运行
 
-要求 Node.js `>=22.13.0`。
+要求 Node.js `22.x`。
 
 ```bash
 npm install
