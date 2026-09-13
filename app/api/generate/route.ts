@@ -86,7 +86,7 @@ async function getReferenceImage(value:string,request:Request){
 
 export async function GET(){
   const configured=process.env.AURA_AI_IMAGE_ENABLED!=="false"&&Boolean(apiKey());
-  return Response.json({configured,provider:providerName(),model:process.env.OPENAI_IMAGE_MODEL||DEFAULT_MODEL,maxImages:MAX_IMAGES,batchSize:UPSTREAM_BATCH_SIZE,quality:imageQuality(),outputSize:"512x512"});
+  return Response.json({configured,provider:"AURA",maxImages:MAX_IMAGES,batchSize:UPSTREAM_BATCH_SIZE,outputSize:"512x512"});
 }
 
 export async function POST(request:Request){
@@ -134,7 +134,7 @@ export async function POST(request:Request){
     }
     const images=(await Promise.all((result.data||[]).map(normalizeImage))).filter((image):image is string=>Boolean(image));
     if(!images.length)return Response.json({error:"OPENAI_EMPTY_RESULT"},{status:502});
-    return Response.json({provider:providerName(),model,images,count:images.length});
+    return Response.json({provider:"AURA",images,count:images.length});
   }catch(error){
     const message=error instanceof Error?error.message:"UNKNOWN";
     const status=message.includes("REFERENCE")?400:500;
