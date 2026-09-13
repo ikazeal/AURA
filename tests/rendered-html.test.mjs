@@ -39,6 +39,20 @@ test("server-renders the AURA product and studio", async () => {
   }
 });
 
+test("saved creations can be restored for another IPFS publish and mint", async () => {
+  const [history, studio, storage] = await Promise.all([
+    readFile(new URL("../app/history/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/studio/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/lib/creation-history.ts", import.meta.url), "utf8"),
+  ]);
+  assert.match(history, /\/studio\?restore=/);
+  assert.match(history, /继续上传 \/ Mint/);
+  assert.match(studio, /URLSearchParams\(window\.location\.search\)/);
+  assert.match(studio, /record\.assets/);
+  assert.match(studio, /setStep\(2\)/);
+  assert.match(storage, /assets\?:CreationHistoryAsset\[\]/);
+});
+
 test("homepage communicates the Robinhood-native product and OpenSea handoff", async () => {
   const response = await render("/");
   assert.equal(response.status, 200);
@@ -120,9 +134,10 @@ test("confirmed mints open the OpenSea listing guide", async () => {
 });
 
 test("AI image generation stays server-side and powers both creation modes", async () => {
-  const [route, studio] = await Promise.all([
+  const [route, studio, publish] = await Promise.all([
     readFile(new URL("../app/api/generate/route.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/studio/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/publish/route.ts", import.meta.url), "utf8"),
   ]);
   assert.match(route, /process\.env\.OPENAI_API_KEY/);
   assert.match(route, /process\.env\.QUICKROUTER_API_KEY/);
@@ -134,9 +149,9 @@ test("AI image generation stays server-side and powers both creation modes", asy
   const editRequest = route.slice(route.indexOf('if(mode==="collection"'), route.indexOf('}else{', route.indexOf('if(mode==="collection"')));
   assert.doesNotMatch(editRequest, /form\.append\("format"/);
   assert.match(editRequest, /form\.append\("response_format","url"\)/);
-  assert.match(route, /videos\.tpkcur\.xyz/);
-  assert.match(route, /data\.get\("imageUrls"\)/);
-  assert.match(route, /fetchRemoteImage/);
+  assert.match(publish, /videos\.tpkcur\.xyz/);
+  assert.match(publish, /data\.get\("imageUrls"\)/);
+  assert.match(publish, /fetchRemoteImage/);
   assert.match(studio, /mode:"subject"/);
   assert.match(studio, /mode:"collection"/);
   assert.match(studio, /appendPublishImages/);

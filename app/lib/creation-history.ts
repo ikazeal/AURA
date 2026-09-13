@@ -1,4 +1,5 @@
-export type CreationHistoryRecord={id:string;createdAt:number;wallet:string;collection:string;prompt:string;style:string;targetAmount:number;previewCount:number;cover:string;status:"generated"|"minted";txHash?:string};
+export type CreationHistoryAsset={id:number;url:string;selected:boolean;rarity:string};
+export type CreationHistoryRecord={id:string;createdAt:number;wallet:string;collection:string;prompt:string;style:string;targetAmount:number;previewCount:number;cover:string;status:"generated"|"minted";txHash?:string;assets?:CreationHistoryAsset[];symbol?:string;itemName?:string;description?:string;rarityModel?:string};
 
 const STORAGE_KEY="aura-creation-history-v1";
 
