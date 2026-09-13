@@ -183,11 +183,14 @@ test("AI image generation stays server-side and powers both creation modes", asy
   assert.match(studio, /生成数量/);
   assert.match(studio, /Math\.min\(4,Number\(amount\)/);
   assert.match(studio, /const \[source,setSource\]=useState\(""\)/);
+  assert.match(studio, /useState<"text"\|"upload">\("text"\)/);
   assert.match(studio, /const \[subjectDescription,setSubjectDescription\]=useState\(""\)/);
   assert.match(studio, /const \[prompt,setPrompt\]=useState\(""\)/);
   assert.match(studio, /placeholder="例如：一只圆润的非人类 AURA 能量精灵/);
   assert.match(studio, /placeholder="例如：保持精灵轮廓、面罩比例与星芒核心/);
   assert.match(studio, /inputMode==="upload"&&!source/);
+  assert.match(studio, /source\?"has-image":"empty"/);
+  assert.match(studio, /选择主体图片/);
   assert.match(studio, /!prompt\.trim\(\)/);
   assert.match(studio, /useState\(""\);const \[symbol,setSymbol\]=useState\(""\)/);
   assert.match(studio, /placeholder="例如：AURA Genesis"/);

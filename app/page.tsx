@@ -51,7 +51,7 @@ export default function Home(){
       <div className="hero-demo">
         <article className="demo-card input-demo"><header><i>1</i><b>上传一张主体照片</b></header><div className="mini-tabs"><span className="active">上传照片</span><span>文字描述</span></div><p>锁定人物、角色、产品或 IP 的核心外观，作为整套 NFT 系列的一致身份基准。</p><div className="upload-mini">▧<small>PNG / JPG / WEBP / PROMPT</small></div></article>
         <span className="demo-arrow">→</span>
-        <article className="demo-card generate-demo"><header><i>2</i><b>AI 生成系列资产</b></header><img src="/brand/aura-nft-01.jpg" alt="AURA Wisp NFT 主体示例"/><div className="fake-progress"><span/><b>68%</b></div><ul><li>锁定主体与品牌识别</li><li>编排 Trait 与稀有属性</li><li>生成标准 Metadata</li></ul></article>
+        <article className="demo-card generate-demo"><header><i>2</i><b>AI 生成系列资产</b></header><img src="/brand/aura-nft-01.jpg" alt="AURA Wisp NFT 主体示例"/><div className="fake-progress"><span/><b>68%</b></div><ul><li><i aria-hidden="true">✓</i>锁定主体与品牌识别</li><li><i aria-hidden="true">✓</i>编排 Trait 与稀有属性</li><li><i aria-hidden="true">✓</i>生成标准 Metadata</li></ul></article>
         <span className="demo-arrow">→</span>
         <article className="demo-card grid-demo"><header><i>3</i><b>Mint 并进入市场</b></header><div>{nftImages.slice(0,12).map((src,i)=><img src={src} alt={`AURA NFT 变体 ${i+1}`} key={src}/>)}</div><p><b>∞</b> OpenSea Ready · 展示 / 挂牌 / 交易</p></article>
       </div>

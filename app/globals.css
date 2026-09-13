@@ -191,3 +191,25 @@ body{font-size:15px;line-height:1.55}.aura-nav nav{font-size:15px}.mainnet-dot{f
 .audit-page,.whitepaper-page{background:#f7f9f7;background-image:none}.audit-status-grid>article,.deployment-card,.control-grid>article,.whitepaper-page article{border-radius:5px!important;box-shadow:none!important}
 /* A single subject is generated and reviewed before collection expansion. */
 .source-description>.subject-candidates{grid-template-columns:1fr;width:min(100%,230px);margin:12px auto 0}
+
+/* Stable check marks in the homepage generation card. */
+.generate-demo li{display:flex;align-items:center;gap:7px}.generate-demo li:before{display:none}.generate-demo li>i{width:15px;height:15px;flex:0 0 15px;display:grid;place-items:center;border-radius:50%;background:#20c98e;color:#fff;font-family:Arial,sans-serif;font-size:10px;font-style:normal;font-weight:700;line-height:1}
+
+/* Creation workstation — one connected product surface instead of floating cards. */
+.studio-workspace{background:#eef2f0}.studio-top{padding-top:42px;padding-bottom:28px}.studio-top h1{margin-top:8px;font-size:36px}.studio-top>div>span{color:#496258;letter-spacing:.7px;text-transform:none}.studio-top>b{border-radius:5px;background:#f8faf9}
+.studio-steps{position:relative;border-left:1px solid #d5ded9;border-right:1px solid #d5ded9;border-bottom:1px solid #d5ded9}.studio-steps:before{content:"";position:absolute;left:7%;right:7%;top:30px;height:1px;background:#e0e6e3}.studio-steps button{position:relative;z-index:1;padding:17px 20px;background:#fff}.studio-steps button i{border:4px solid #fff;border-radius:5px}.studio-steps button.active{background:#f8fbf9}
+.studio-stage{padding-top:24px}.stage-input,.metadata-stage,.mint-stage{gap:0;overflow:hidden;border:1px solid #ccd8d2;border-radius:8px;background:#fff;box-shadow:0 18px 50px rgba(23,48,38,.06)}.stage-input>aside,.stage-input>article,.metadata-stage>aside,.metadata-stage>article,.mint-stage>aside,.mint-stage>article{border:0;border-radius:0;box-shadow:none}.stage-input>aside,.metadata-stage>aside,.mint-stage>aside{border-right:1px solid #d9e2dd;background:#f8faf9}.stage-input>aside{padding:28px}.stage-input>article{padding:28px 32px}.studio-stage>div>aside>span,.studio-stage>div>article>span{color:#5f7169;font-size:10px;letter-spacing:.5px;text-transform:none}.studio-stage h2{margin-top:8px;margin-bottom:20px;font-weight:620;letter-spacing:-.5px}
+.source-tabs{margin-bottom:14px;padding:3px;border:1px solid #dce4e0;border-radius:5px;background:#eef2f0}.source-tabs button{min-height:38px;border-radius:3px}.source-tabs button.active{background:#fff;color:#0e7458;box-shadow:0 1px 3px rgba(20,45,35,.08)}
+.source-description{min-height:350px;padding:16px;border:1px solid #d6e0db;border-radius:5px;background:#fff}.source-description textarea{height:126px;border-color:#d7e0dc;background:#fff}.source-description .subject-generate{min-height:44px;margin-top:12px;border-radius:4px;background:#173d31}.stage-input>aside>p{margin-bottom:0;color:#707d77}
+.source-upload{height:350px;justify-content:flex-end;border-radius:5px}.source-upload.empty{justify-content:center;gap:12px;border:1px dashed #aebdb6;background-color:#f6f8f7!important;color:#27342e!important}.source-upload.empty:after{display:none}.source-upload.empty b,.source-upload.empty small{color:inherit}.source-upload.empty b{padding:0;background:transparent;font-size:14px}.source-upload.empty small{margin-top:0;color:#7c8983}.upload-empty-mark{position:relative;z-index:2;width:54px;height:54px;display:grid;place-items:center;border:1px solid #c9d5cf;border-radius:50%;background:#fff;color:#18785d}.upload-empty-mark svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ai-provider{margin-bottom:20px;padding:12px 14px;border-radius:4px;background:#f7faf8}.ai-provider.online>i{animation:none;box-shadow:0 0 0 3px rgba(22,201,140,.1)}.ai-provider em{border-radius:3px;letter-spacing:.5px}.stage-input>article>label{margin-top:0}.stage-input>article textarea{height:190px}.studio-fields{gap:12px}.stage-primary{min-height:46px;border-radius:4px!important;background:#1b805f!important;color:#fff!important;box-shadow:none!important}.stage-primary:hover:not(:disabled){background:#146c50!important}.engine-note{border-left:2px solid #9fc7b8;border-radius:0;background:#f5f7f6}
+@media(max-width:850px){.stage-input,.metadata-stage,.mint-stage{border-radius:6px}.stage-input>aside,.metadata-stage>aside,.mint-stage>aside{border-right:0;border-bottom:1px solid #d9e2dd}.studio-steps:before{display:none}}
+
+/* Keep the restored hero workflow readable on standard laptop widths. */
+@media(max-width:1360px) and (min-width:681px){
+  .aura-hero{grid-template-columns:1fr;gap:46px;padding-top:54px}
+  .hero-copy{text-align:center}
+  .hero-copy h1,.hero-copy>p{margin-left:auto;margin-right:auto}
+  .hero-action-row,.hero-buttons,.hero-facts{justify-content:center}
+  .hero-demo{width:min(900px,100%);margin:0 auto;grid-template-columns:minmax(190px,.8fr) 22px minmax(250px,1fr) 22px minmax(280px,1.12fr)}
+}
