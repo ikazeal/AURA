@@ -155,6 +155,7 @@ test("AI image generation stays server-side and powers both creation modes", asy
   assert.match(route, /Never create a collage, contact sheet, grid, split screen/);
   assert.match(route, /Render only one collectible variant in this output/);
   assert.doesNotMatch(route, /Produce \$\{count/);
+  assert.match(route, /body pose, gesture, camera angle, background environment, lighting, headwear or head accessory/);
   const editRequest = route.slice(route.indexOf('if(mode==="collection"'), route.indexOf('}else{', route.indexOf('if(mode==="collection"')));
   assert.doesNotMatch(editRequest, /form\.append\("format"/);
   assert.match(editRequest, /form\.append\("response_format","url"\)/);
@@ -174,4 +175,9 @@ test("AI image generation stays server-side and powers both creation modes", asy
   assert.match(studio, /生成 1 个主体/);
   assert.match(studio, /生成数量（最多 4 张）/);
   assert.match(studio, /Math\.min\(4,Number\(amount\)/);
+  assert.match(studio, /useState\(""\);const \[symbol,setSymbol\]=useState\(""\)/);
+  assert.match(studio, /placeholder="例如：AURA Genesis"/);
+  assert.match(studio, /以上内容仅为填写示例/);
+  assert.match(studio, /disabled=\{!issuanceReady\}/);
+  assert.doesNotMatch(studio, /由 AURA Collection Engine 生成的链上数字收藏系列/);
 });
