@@ -39,7 +39,7 @@ test("server-renders the AURA product and studio", async () => {
   }
 });
 
-test("saved creations can be restored for another IPFS publish and mint", async () => {
+test("only unminted creations can be restored for IPFS publish and mint", async () => {
   const [history, studio, storage] = await Promise.all([
     readFile(new URL("../app/history/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/studio/page.tsx", import.meta.url), "utf8"),
@@ -47,7 +47,10 @@ test("saved creations can be restored for another IPFS publish and mint", async 
   ]);
   assert.match(history, /\/studio\?restore=/);
   assert.match(history, /继续上传 \/ Mint/);
+  assert.match(history, /发行已完成 · 不可重复 Mint/);
+  assert.doesNotMatch(history, /再次发行/);
   assert.match(studio, /URLSearchParams\(window\.location\.search\)/);
+  assert.match(studio, /if\(record\.status==="minted"\)\{window\.location\.replace\("\/history"\)/);
   assert.match(studio, /record\.assets/);
   assert.match(studio, /setStep\(2\)/);
   assert.match(storage, /assets\?:CreationHistoryAsset\[\]/);
