@@ -110,7 +110,9 @@ export async function POST(request:Request){
       form.append("n",String(count));
       form.append("size","1024x1024");
       form.append("quality",process.env.OPENAI_IMAGE_QUALITY||"medium");
-      if(providerName()==="QuickRouter"){form.append("format","webp");form.append("response_format","url")}
+      // QuickRouter accepts `response_format` for image edits, but rejects the
+      // generations-only `format` field in multipart edit requests.
+      if(providerName()==="QuickRouter")form.append("response_format","url");
       else{form.append("output_format","webp");form.append("output_compression","82")}
       const reference=await getReferenceImage(body.referenceImage,request);
       form.append("image",reference.blob,reference.filename);

@@ -131,6 +131,9 @@ test("AI image generation stays server-side and powers both creation modes", asy
   assert.match(route, /AURA_AI_BASE_URL/);
   assert.match(route, /images\/\$\{path\}/);
   assert.match(route, /providerName\(\)==="QuickRouter"/);
+  const editRequest = route.slice(route.indexOf('if(mode==="collection"'), route.indexOf('}else{', route.indexOf('if(mode==="collection"')));
+  assert.doesNotMatch(editRequest, /form\.append\("format"/);
+  assert.match(editRequest, /form\.append\("response_format","url"\)/);
   assert.match(studio, /mode:"subject"/);
   assert.match(studio, /mode:"collection"/);
   assert.match(studio, /图像引擎已连接/);
