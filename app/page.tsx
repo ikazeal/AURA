@@ -44,12 +44,12 @@ export default function Home(){
       <div className="hero-copy">
         <span className="hero-pill"><i/> ROBINHOOD CHAIN-NATIVE · GENERATIVE NFT AI</span>
         <h1>为 Robinhood Chain 而生的<br/><em>生成式 NFT AI 引擎。</em></h1>
-        <p>AURA 致力于打造<strong>首个基于 Robinhood Chain 的 NFT 图片 AI 产品</strong>。从一句描述或一组主体素材出发，完成系列视觉生成、Trait 与稀有度编排、IPFS Metadata 和 <strong>Mainnet Mint</strong>；上链后可在 <strong>OpenSea</strong> 展示、挂牌与交易。</p>
+        <p>AURA 致力于打造<strong>首个基于 Robinhood Chain 的 NFT 图片 AI 产品</strong>。上传一张主体照片，即可快速批量生成多张<strong>身份一致、视觉各异</strong>的 NFT 图片，并完成 Trait、IPFS Metadata 与 <strong>Mainnet Mint</strong>；上链后可在 <strong>OpenSea</strong> 展示、挂牌与交易。</p>
         <div className="hero-action-row"><div className="hero-buttons"><a href="/studio">创建 NFT Collection <b>→</b></a><a className="hero-secondary" href="/how-it-works">查看技术架构 <b>→</b></a></div><div className="hero-mini-metrics" aria-label="AURA 使用数据"><span><b>200<sup>+</sup></b><small>早期使用者</small></span><i/><span><b>4</b><small>生态集成</small></span></div></div>
         <div className="hero-facts"><span><b>01</b> Robinhood 原生</span><span><b>02</b> AURA V2 合约</span><span><b>03</b> OpenSea Ready</span></div>
       </div>
       <div className="hero-demo">
-        <article className="demo-card input-demo"><header><i>1</i><b>定义创意主体</b></header><div className="mini-tabs"><span className="active">文字描述</span><span>上传素材</span></div><p>输入项目概念或上传 Logo、IP 形象与产品素材，建立统一的主体识别规范。</p><div className="upload-mini">▧<small>PROMPT / PNG / JPG / WEBP</small></div></article>
+        <article className="demo-card input-demo"><header><i>1</i><b>上传一张主体照片</b></header><div className="mini-tabs"><span className="active">上传照片</span><span>文字描述</span></div><p>锁定人物、角色、产品或 IP 的核心外观，作为整套 NFT 系列的一致身份基准。</p><div className="upload-mini">▧<small>PNG / JPG / WEBP / PROMPT</small></div></article>
         <span className="demo-arrow">→</span>
         <article className="demo-card generate-demo"><header><i>2</i><b>AI 生成系列资产</b></header><img src="/brand/aura-nft-01.jpg" alt="AURA Wisp NFT 主体示例"/><div className="fake-progress"><span/><b>68%</b></div><ul><li>锁定主体与品牌识别</li><li>编排 Trait 与稀有属性</li><li>生成标准 Metadata</li></ul></article>
         <span className="demo-arrow">→</span>
@@ -58,7 +58,7 @@ export default function Home(){
     </section>
 
     <section className="flow" id="features">
-      {[['01','定义主体','描述或上传项目视觉资产'],['02','生成 Collection','批量生成变体与稀有属性'],['03','Mainnet Mint','IPFS Metadata 与钱包签名'],['04','OpenSea 市场','展示、挂牌与二级交易']].map((x,i)=><article key={x[0]}><i>{x[0]}</i><div><b>{x[1]}</b><p>{x[2]}</p></div>{i<3&&<span>→</span>}</article>)}
+      {[['01','上传一张照片','锁定角色、产品或 IP 主体'],['02','快速批量生成','单次输出多张相似但不重复的变体'],['03','Mainnet Mint','轻量图片、IPFS Metadata 与钱包签名'],['04','OpenSea 市场','展示、挂牌与二级交易']].map((x,i)=><article key={x[0]}><i>{x[0]}</i><div><b>{x[1]}</b><p>{x[2]}</p></div>{i<3&&<span>→</span>}</article>)}
     </section>
 
     <section className="ecosystem-strip">
@@ -67,7 +67,7 @@ export default function Home(){
     </section>
 
     <section className="why-section">
-      <div className="why-intro"><span>WHY AURA</span><h2>不是生成很多图片，<br/>而是完成一个<em>可发行的系列。</em></h2><p>普通图片工具解决单张创作，AURA 重点解决大规模 NFT 生产中的<strong>主体一致性、批量差异化、元数据整理和上链衔接</strong>。</p><a href="/studio">创建第一个系列 →</a></div>
+      <div className="why-intro"><span>WHY AURA</span><h2>不只生成一张图片，<br/>而是快速完成一个<em>可发行的系列。</em></h2><p>AURA 重点解决普通 AI 工具<strong>单张等待、主体走样、文件过大</strong>的问题：以一张照片为基准，单次批量产出多种变体，并自动准备轻量 NFT 图片、元数据与上链流程。</p><a href="/studio">创建第一个系列 →</a></div>
       <div className="why-list">
         <article><i>01</i><div><b>主体一致，不会越生成越走样</b><p>锁定脸部、轮廓、Logo 与关键结构，只让背景、服装、材质和配件发生变化。</p></div></article>
         <article><i>02</i><div><b>规模化生成，不必手工组合图层</b><p>从几十张概念验证扩展至上千张系列，同时控制属性分布与稀有度。</p></div></article>

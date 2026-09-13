@@ -1,11 +1,13 @@
 import {AbiCoder,Contract,JsonRpcProvider,Wallet,isAddress,keccak256,verifyMessage} from "ethers";
+import sharp from "sharp";
 
 export const runtime="nodejs";
 export const maxDuration=300;
 export const dynamic="force-dynamic";
 
-const MAX_FILES=50;
+const MAX_FILES=4;
 const MAX_FILE_BYTES=30*1024*1024;
+const NFT_IMAGE_SIZE=512;
 const SIGNATURE_TTL_MS=5*60*1000;
 const AUTHORIZATION_TTL_SECONDS=10*60;
 const CONTRACT=process.env.NEXT_PUBLIC_AURA_NFT_CONTRACT||"";
@@ -60,6 +62,15 @@ async function fetchRemoteImage(value:string){
   return blob;
 }
 
+async function optimizeNftImage(file:Blob){
+  const source=Buffer.from(await file.arrayBuffer());
+  const output=await sharp(source)
+    .resize(NFT_IMAGE_SIZE,NFT_IMAGE_SIZE,{fit:"cover",position:"centre"})
+    .webp({quality:82,effort:4})
+    .toBuffer();
+  return new Blob([new Uint8Array(output)],{type:"image/webp"});
+}
+
 export async function POST(request:Request){
   if(process.env.AURA_UPLOAD_ENABLED!=="true")return Response.json({error:"UPLOAD_NOT_CONFIGURED"},{status:503});
   const jwt=process.env.PINATA_JWT;
@@ -85,17 +96,17 @@ export async function POST(request:Request){
     const metadata=JSON.parse(rawMetadata) as Array<Record<string,unknown>>;
     if(!Array.isArray(metadata)||metadata.length!==images.length)return Response.json({error:"INVALID_METADATA"},{status:400});
 
-    const imageUris:string[]=[];
-    const tokenUris:string[]=[];
-    for(let i=0;i<images.length;i++){
+    const published=await Promise.all(images.map(async(image,i)=>{
       const number=String(i+1).padStart(4,"0");
-      const imageCid=await pinFile(images[i],`${collection}-${number}.${images[i].type.split("/")[1]||"jpg"}`,jwt);
+      const optimized=await optimizeNftImage(image);
+      const imageCid=await pinFile(optimized,`${collection}-${number}.webp`,jwt);
       const imageUri=`ipfs://${imageCid}`;
-      imageUris.push(imageUri);
       const jsonFile=new Blob([JSON.stringify({...metadata[i],image:imageUri},null,2)],{type:"application/json"});
       const metadataCid=await pinFile(jsonFile,`${collection}-metadata-${number}.json`,jwt);
-      tokenUris.push(`ipfs://${metadataCid}`);
-    }
+      return {imageUri,tokenUri:`ipfs://${metadataCid}`};
+    }));
+    const imageUris=published.map(item=>item.imageUri);
+    const tokenUris=published.map(item=>item.tokenUri);
     const authorization=await issueMintAuthorization(wallet,tokenUris);
     return Response.json({provider:"Pinata IPFS",imageUris,tokenUris,count:tokenUris.length,authorization});
   }catch(error){
