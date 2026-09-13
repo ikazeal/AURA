@@ -68,10 +68,10 @@ async function normalizeImage(item:{b64_json?:string;url?:string}){
   return item.url||null;
 }
 
-function productionPrompt(mode:"subject"|"collection",prompt:string,style:string,count:number){
-  const common="Create a premium square NFT artwork. No words, letters, logos, signatures, frames, UI, or watermarks. Keep the composition clear at thumbnail size.";
+function productionPrompt(mode:"subject"|"collection",prompt:string,style:string){
+  const common="Create one premium square NFT artwork as a single full-canvas scene. Never create a collage, contact sheet, grid, split screen, storyboard, multiple panels, inset images, or before-and-after layout. No words, letters, logos, signatures, frames, UI, or watermarks. Keep the composition clear at thumbnail size.";
   if(mode==="subject")return `${common} Design one distinctive, original, non-human collectible character from this brief: ${prompt}. Show exactly one complete centered subject, front three-quarter view, clean background, strong silhouette, coherent materials, professional ${style||"digital collectible"} art direction. This image will become the locked identity reference for a consistent NFT collection.`;
-  return `${common} Use the supplied image as the locked identity reference. Preserve the subject's face, silhouette, proportions, signature colors and core brand marks exactly. Produce ${count>1?`${count} clearly differentiated collectible variants`:`one new collectible variant`} in ${style||"digital collectible"} style. Creative direction: ${prompt}. Change only traits such as outfit, accessory, material, lighting and environment. Each output must use a distinct trait combination. Exactly one subject per image, consistent camera, production-ready collection quality.`;
+  return `${common} This request is one item in a separately sampled batch. Render only one collectible variant in this output, never several alternatives inside the canvas. Use the supplied image as the locked identity reference. Preserve the subject's face, silhouette, proportions, signature colors and core brand marks exactly. Create one new variant in ${style||"digital collectible"} style. Creative direction: ${prompt}. Change only traits such as outfit, accessory, material, lighting and environment. Show exactly one complete centered subject and one coherent background, with no repeated character. Use a consistent camera and production-ready collection quality.`;
 }
 
 async function getReferenceImage(value:string,request:Request){
@@ -101,7 +101,7 @@ export async function POST(request:Request){
     if(!consumeQuota(request,count))return Response.json({error:"AI_RATE_LIMITED"},{status:429});
 
     const model=process.env.OPENAI_IMAGE_MODEL||DEFAULT_MODEL;
-    const finalPrompt=productionPrompt(mode,prompt,style,count);
+    const finalPrompt=productionPrompt(mode,prompt,style);
     let response:Response;
     if(mode==="collection"&&body.referenceImage){
       const form=new FormData();

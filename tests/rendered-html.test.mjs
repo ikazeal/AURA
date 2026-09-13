@@ -149,6 +149,9 @@ test("AI image generation stays server-side and powers both creation modes", asy
   assert.match(route, /const UPSTREAM_BATCH_SIZE=4/);
   assert.match(route, /outputSize:"512x512"/);
   assert.match(route, /imageQuality\(\)/);
+  assert.match(route, /Never create a collage, contact sheet, grid, split screen/);
+  assert.match(route, /Render only one collectible variant in this output/);
+  assert.doesNotMatch(route, /Produce \$\{count/);
   const editRequest = route.slice(route.indexOf('if(mode==="collection"'), route.indexOf('}else{', route.indexOf('if(mode==="collection"')));
   assert.doesNotMatch(editRequest, /form\.append\("format"/);
   assert.match(editRequest, /form\.append\("response_format","url"\)/);
