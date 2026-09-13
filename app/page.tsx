@@ -42,9 +42,9 @@ export default function Home(){
       <div className="hero-glow one"/><div className="hero-glow two"/>
       <div className="hero-energy" aria-hidden="true">{Array.from({length:7},(_,i)=><i key={i}/>)}</div>
       <div className="hero-copy">
-        <span className="hero-pill"><i/> AURA / ROBINHOOD MAINNET</span>
-        <h1>创建、发行并管理<br/><em>生成式 NFT 系列。</em></h1>
-        <p>AURA 定位为<strong>首个基于 Robinhood Chain 的 NFT 图片 AI 产品</strong>。上传一张主体照片，即可批量生成多张<strong>身份一致、视觉各异</strong>的作品，并完成 Trait、IPFS Metadata 与 <strong>Mainnet Mint</strong>；上链后可在 <strong>OpenSea</strong> 展示、挂牌与交易。</p>
+        <span className="hero-pill"><i/> ROBINHOOD CHAIN-NATIVE · GENERATIVE NFT AI</span>
+        <h1>为 Robinhood Chain 而生的<br/><em>生成式 NFT AI 引擎。</em></h1>
+        <p>AURA 致力于打造<strong>首个基于 Robinhood Chain 的 NFT 图片 AI 产品</strong>。上传一张主体照片，即可快速批量生成多张<strong>身份一致、视觉各异</strong>的 NFT 图片，并完成 Trait、IPFS Metadata 与 <strong>Mainnet Mint</strong>；上链后可在 <strong>OpenSea</strong> 展示、挂牌与交易。</p>
         <div className="hero-action-row"><div className="hero-buttons"><a href="/studio">创建 NFT Collection <b>→</b></a><a className="hero-secondary" href="/how-it-works">查看技术架构 <b>→</b></a></div><div className="hero-mini-metrics" aria-label="AURA 使用数据"><span><b>200<sup>+</sup></b><small>早期使用者</small></span><i/><span><b>4</b><small>生态集成</small></span></div></div>
         <div className="hero-facts"><span><b>01</b> Robinhood 原生</span><span><b>02</b> AURA V2 合约</span><span><b>03</b> OpenSea Ready</span></div>
       </div>
@@ -67,7 +67,7 @@ export default function Home(){
     </section>
 
     <section className="why-section">
-      <div className="why-intro"><span>产品能力</span><h2>不只生成一张图片，<br/>而是快速完成一个<em>可发行的系列。</em></h2><p>AURA 重点解决普通 AI 工具<strong>单张等待、主体走样、文件过大</strong>的问题：以一张照片为基准，单次批量产出多种变体，并自动准备轻量 NFT 图片、元数据与上链流程。</p><a href="/studio">创建第一个系列 →</a></div>
+      <div className="why-intro"><span>WHY AURA</span><h2>不只生成一张图片，<br/>而是快速完成一个<em>可发行的系列。</em></h2><p>AURA 重点解决普通 AI 工具<strong>单张等待、主体走样、文件过大</strong>的问题：以一张照片为基准，单次批量产出多种变体，并自动准备轻量 NFT 图片、元数据与上链流程。</p><a href="/studio">创建第一个系列 →</a></div>
       <div className="why-list">
         <article><i>01</i><div><b>主体一致，不会越生成越走样</b><p>锁定脸部、轮廓、Logo 与关键结构，只让背景、服装、材质和配件发生变化。</p></div></article>
         <article><i>02</i><div><b>规模化生成，不必手工组合图层</b><p>从几十张概念验证扩展至上千张系列，同时控制属性分布与稀有度。</p></div></article>
@@ -77,18 +77,18 @@ export default function Home(){
     </section>
 
     <section className="collection" id="gallery">
-      <div className="section-title"><span>系列预览</span><h2>一个主体，<em>上千种可能。</em></h2><p>主体保持一致，背景、服装、材质与稀有属性持续变化。</p></div>
+      <div className="section-title"><span>GENERATED COLLECTION</span><h2>一个主体，<em>上千种可能。</em></h2><p>主体保持一致，背景、服装、材质与稀有属性持续变化。</p></div>
       <div className="nft-grid">{nftImages.slice(0,4).map((src,i)=><figure key={src}><img src={src} alt={`AURA Wisp 能量精灵 ${i+1}`}/><figcaption><b>{traits[i]}能量精灵</b><span>#{String(i+1).padStart(4,"0")}</span></figcaption></figure>)}</div>
       <div className="collection-summary"><div><b>4 个方向，仅为概念预览</b><span>由同一主体继续组合场景、材质与稀有属性，可扩展为 1,000 / 3,333 / 10,000 件完整系列。</span></div><a href="/studio">生成我的系列 →</a></div>
     </section>
 
     <section className="case-section">
-      <div className="section-title"><span>行业案例</span><h2>真实 NFT 项目，如何建立系列价值</h2><p>以下为行业公开案例，并非 AURA 客户案例。</p></div>
+      <div className="section-title"><span>REAL-WORLD REFERENCES</span><h2>真实 NFT 项目，如何建立系列价值</h2><p>以下为行业公开案例，并非 AURA 客户案例。</p></div>
       <div className="case-grid">{industryCases.map((item,i)=><article key={item.name} className="clickable-case"><button className="case-art real" onClick={()=>setSelectedIndustry(i)} aria-label={`查看 ${item.name} 项目数据`}><img className={'imageClass' in item?item.imageClass:''} src={item.image} alt={`${item.name} 真实项目形象`}/><span>{item.type}</span><i>点击查看数据 ↗</i></button><small>{item.type} / {item.scale}</small><h3>{item.name}</h3><p>{item.value}</p><div className="case-metric"><b>{item.volume}</b><span>{item.volumeLabel}</span></div><button onClick={()=>setSelectedIndustry(i)}>查看价值与成交数据 <span>↗</span></button></article>)}</div>
     </section>
 
     <section className="value-section">
-      <div className="value-heading"><span>NFT 价值</span><h2>把视觉变成 NFT，<br/>能带来什么价值？</h2><p>NFT 的价值不只是“把图片放到链上”，而是为内容增加<strong>可验证的所有权、身份关系与可持续使用方式</strong>。</p></div>
+      <div className="value-heading"><span>WHY TURN IT INTO NFTS</span><h2>把视觉变成 NFT，<br/>能带来什么价值？</h2><p>NFT 的价值不只是“把图片放到链上”，而是为内容增加<strong>可验证的所有权、身份关系与可持续使用方式</strong>。</p></div>
       <div className="value-cards">
         <article><i>01</i><h3>可验证的数字所有权</h3><p>每件作品拥有独立编号、链上记录和持有地址，来源与归属更容易验证。</p><span>例如：限量数字艺术、创作者证书</span></article>
         <article><i>02</i><h3>社区身份与访问权限</h3><p>NFT 可以作为会员凭证，解锁内容、活动、投票或专属产品。</p><span>例如：会员通行证、游戏角色身份</span></article>
@@ -97,7 +97,7 @@ export default function Home(){
       </div>
     </section>
 
-    <section className="chain-section" id="chain"><div><span>Robinhood Mainnet / OpenSea</span><h2>从生成到交易，<br/>连接完整 NFT 生命周期。</h2><p>AURA 自动准备图片、Trait、稀有度与标准 JSON Metadata，并通过 V2 合约在 Robinhood Mainnet 完成 Mint。交易确认后，用户可在 OpenSea 连接同一钱包，完成系列展示、挂牌、报价与二级交易。</p><button onClick={openWallets}>{connected?`${wallet.slice(0,6)}…${wallet.slice(-4)} · 钱包详情`:'连接钱包开始创作'} →</button><a className="opensea-proof-link" href="https://opensea.io/collections/chain/robinhood" target="_blank" rel="noopener noreferrer">浏览 OpenSea 上的 Robinhood NFT ↗</a></div><aside><img src="/brand/robinhood.ico" alt="Robinhood"/><b>Robinhood Chain</b><span>MAINNET</span><dl><div><dt>Chain ID</dt><dd>4663</dd></div><div><dt>Gas token</dt><dd>ETH</dd></div><div><dt>Marketplace</dt><dd>OpenSea</dd></div></dl></aside></section>
+    <section className="chain-section" id="chain"><div><span>ROBINHOOD-NATIVE · OPENSEA READY</span><h2>从生成到交易，<br/>连接完整 NFT 生命周期。</h2><p>AURA 自动准备图片、Trait、稀有度与标准 JSON Metadata，并通过 V2 合约在 Robinhood Mainnet 完成 Mint。交易确认后，用户可在 OpenSea 连接同一钱包，完成系列展示、挂牌、报价与二级交易。</p><button onClick={openWallets}>{connected?`${wallet.slice(0,6)}…${wallet.slice(-4)} · 钱包详情`:'连接钱包开始创作'} →</button><a className="opensea-proof-link" href="https://opensea.io/collections/chain/robinhood" target="_blank" rel="noopener noreferrer">浏览 OpenSea 上的 Robinhood NFT ↗</a></div><aside><img src="/brand/robinhood.ico" alt="Robinhood"/><b>Robinhood Chain</b><span>MAINNET</span><dl><div><dt>Chain ID</dt><dd>4663</dd></div><div><dt>Gas token</dt><dd>ETH</dd></div><div><dt>Marketplace</dt><dd>OpenSea</dd></div></dl></aside></section>
 
     {selectedIndustry!==null&&(()=>{const item=industryCases[selectedIndustry];return <div className="industry-modal" role="dialog" aria-modal="true" aria-label={`${item.name} 数据详情`}><div className="industry-panel"><button className="industry-close" onClick={()=>setSelectedIndustry(null)} aria-label="关闭">×</button><div className="industry-image"><img className={'imageClass' in item?item.imageClass:''} src={item.image} alt={`${item.name} NFT`}/><span>REAL-WORLD NFT CASE</span></div><div className="industry-copy"><small>{item.type}</small><h3>{item.name}</h3><p className="industry-value"><strong>项目价值：</strong>{item.value}</p><div className="industry-stats"><article><span>系列规模 / 用户</span><b>{item.scale}</b></article><article><span>{item.volumeLabel}</span><b>{item.volume}</b></article></div><p className="industry-date">数据口径：{item.asOf}</p><div className="revenue-box"><b>价值与收益如何产生</b><p>{item.revenue}</p></div><div className="risk-note"><b>重要说明</b><p>以上是历史公开数据，不代表当前价格，也不构成投资建议。NFT 价格波动显著，历史成交表现不保证未来收益。</p></div><a href={item.source} target="_blank" rel="noreferrer">查看数据来源 ↗</a></div></div></div>})()}
 
