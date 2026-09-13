@@ -61,6 +61,8 @@ test("homepage communicates the Robinhood-native product and OpenSea handoff", a
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /首个基于 Robinhood Chain 的 NFT 图片 AI 产品/);
+  assert.match(html, /AURA \/ ROBINHOOD MAINNET/);
+  assert.doesNotMatch(html, /ROBINHOOD CHAIN-NATIVE · GENERATIVE NFT AI/);
   assert.match(html, /OpenSea Ready/);
   assert.match(html, /展示、挂牌与二级交易/);
   assert.match(html, /opensea\.io\/collections\/chain\/robinhood/);
