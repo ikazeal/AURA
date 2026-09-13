@@ -31,7 +31,7 @@ async function issueMintAuthorization(wallet:string,tokenUris:string[]){
   return {deadline,signature,nonce:nonce.toString(),totalPrice:totalPrice.toString()};
 }
 
-async function pinFile(file:File,name:string,jwt:string){
+async function pinFile(file:Blob,name:string,jwt:string){
   const body=new FormData();
   body.append("network","public");
   body.append("name",name);
@@ -54,7 +54,7 @@ export async function POST(request:Request){
     const timestamp=Number(data.get("timestamp"));
     const signature=String(data.get("signature")||"");
     const rawMetadata=String(data.get("metadata")||"");
-    const images=data.getAll("images").filter((entry):entry is File=>entry instanceof File);
+    const images=data.getAll("images").filter((entry):entry is File=>typeof entry!=="string");
     if(!isAddress(wallet)||!collection||!Number.isFinite(timestamp)||Math.abs(Date.now()-timestamp)>SIGNATURE_TTL_MS)return Response.json({error:"INVALID_REQUEST"},{status:400});
     const message=`AURA IPFS Publish\nWallet:${wallet}\nCollection:${collection}\nTimestamp:${timestamp}`;
     if(verifyMessage(message,signature).toLowerCase()!==wallet.toLowerCase())return Response.json({error:"INVALID_SIGNATURE"},{status:401});
@@ -69,7 +69,7 @@ export async function POST(request:Request){
       const imageCid=await pinFile(images[i],`${collection}-${number}.${images[i].type.split("/")[1]||"jpg"}`,jwt);
       const imageUri=`ipfs://${imageCid}`;
       imageUris.push(imageUri);
-      const jsonFile=new File([JSON.stringify({...metadata[i],image:imageUri},null,2)],`${number}.json`,{type:"application/json"});
+      const jsonFile=new Blob([JSON.stringify({...metadata[i],image:imageUri},null,2)],{type:"application/json"});
       const metadataCid=await pinFile(jsonFile,`${collection}-metadata-${number}.json`,jwt);
       tokenUris.push(`ipfs://${metadataCid}`);
     }

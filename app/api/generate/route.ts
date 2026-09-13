@@ -81,7 +81,7 @@ async function getReferenceImage(value:string,request:Request){
   const blob=await response.blob();
   if(!blob.type.startsWith("image/")||blob.size>MAX_REFERENCE_BYTES)throw new Error("INVALID_REFERENCE_IMAGE");
   const extension=blob.type.includes("webp")?"webp":blob.type.includes("jpeg")||blob.type.includes("jpg")?"jpg":"png";
-  return new File([blob],`aura-reference.${extension}`,{type:blob.type||"image/png"});
+  return {blob,filename:`aura-reference.${extension}`};
 }
 
 export async function GET(){
@@ -112,7 +112,8 @@ export async function POST(request:Request){
       form.append("quality",process.env.OPENAI_IMAGE_QUALITY||"medium");
       if(providerName()==="QuickRouter"){form.append("format","webp");form.append("response_format","url")}
       else{form.append("output_format","webp");form.append("output_compression","82")}
-      form.append("image",await getReferenceImage(body.referenceImage,request));
+      const reference=await getReferenceImage(body.referenceImage,request);
+      form.append("image",reference.blob,reference.filename);
       response=await imageProviderFetch("edits",{method:"POST",headers:openAIHeaders(),body:form});
     }else{
       const outputOptions=providerName()==="QuickRouter"?{format:"webp",response_format:"url"}:{output_format:"webp",output_compression:82};
