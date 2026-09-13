@@ -11,6 +11,7 @@ const AUTHORIZATION_TTL_SECONDS=10*60;
 const CONTRACT=process.env.NEXT_PUBLIC_AURA_NFT_CONTRACT||"";
 const CONTRACT_VERSION=process.env.NEXT_PUBLIC_AURA_NFT_CONTRACT_VERSION||"1";
 const RPC=process.env.AURA_RPC_URL||"https://rpc.mainnet.chain.robinhood.com";
+const DEFAULT_REMOTE_IMAGE_HOSTS=["videos.tpkcur.xyz"];
 
 type PinataResponse={data?:{cid?:string};error?:string};
 
@@ -42,6 +43,23 @@ async function pinFile(file:Blob,name:string,jwt:string){
   return result.data.cid;
 }
 
+function remoteImageHosts(){
+  return [...DEFAULT_REMOTE_IMAGE_HOSTS,...(process.env.AURA_AI_IMAGE_HOSTS||"").split(",")].map(host=>host.trim().toLowerCase()).filter(Boolean);
+}
+
+async function fetchRemoteImage(value:string){
+  const url=new URL(value);
+  const allowed=remoteImageHosts().some(host=>url.hostname.toLowerCase()===host||url.hostname.toLowerCase().endsWith(`.${host}`));
+  if(url.protocol!=="https:"||!allowed)throw new Error("REMOTE_IMAGE_HOST_NOT_ALLOWED");
+  const response=await fetch(url,{redirect:"follow",signal:AbortSignal.timeout(120_000)});
+  if(!response.ok)throw new Error(`REMOTE_IMAGE_FETCH_FAILED_${response.status}`);
+  const declaredSize=Number(response.headers.get("content-length")||0);
+  if(declaredSize>MAX_FILE_BYTES)throw new Error("REMOTE_IMAGE_TOO_LARGE");
+  const blob=await response.blob();
+  if(blob.size>MAX_FILE_BYTES||!blob.type.startsWith("image/"))throw new Error("INVALID_REMOTE_IMAGE");
+  return blob;
+}
+
 export async function POST(request:Request){
   if(process.env.AURA_UPLOAD_ENABLED!=="true")return Response.json({error:"UPLOAD_NOT_CONFIGURED"},{status:503});
   const jwt=process.env.PINATA_JWT;
@@ -54,10 +72,15 @@ export async function POST(request:Request){
     const timestamp=Number(data.get("timestamp"));
     const signature=String(data.get("signature")||"");
     const rawMetadata=String(data.get("metadata")||"");
-    const images=data.getAll("images").filter((entry):entry is File=>typeof entry!=="string");
+    const uploadedImages=data.getAll("images").filter((entry):entry is File=>typeof entry!=="string");
+    const rawImageUrls=String(data.get("imageUrls")||"");
+    const imageUrls=rawImageUrls?JSON.parse(rawImageUrls) as unknown:[];
     if(!isAddress(wallet)||!collection||!Number.isFinite(timestamp)||Math.abs(Date.now()-timestamp)>SIGNATURE_TTL_MS)return Response.json({error:"INVALID_REQUEST"},{status:400});
     const message=`AURA IPFS Publish\nWallet:${wallet}\nCollection:${collection}\nTimestamp:${timestamp}`;
     if(verifyMessage(message,signature).toLowerCase()!==wallet.toLowerCase())return Response.json({error:"INVALID_SIGNATURE"},{status:401});
+    if(!Array.isArray(imageUrls)||imageUrls.some(value=>typeof value!=="string"))return Response.json({error:"INVALID_IMAGE_URLS"},{status:400});
+    if(uploadedImages.length&&imageUrls.length)return Response.json({error:"MIXED_IMAGE_SOURCES"},{status:400});
+    const images:Blob[]=uploadedImages.length?uploadedImages:await Promise.all((imageUrls as string[]).map(fetchRemoteImage));
     if(!images.length||images.length>MAX_FILES||images.some(file=>file.size>MAX_FILE_BYTES||!file.type.startsWith("image/")))return Response.json({error:"INVALID_FILES"},{status:400});
     const metadata=JSON.parse(rawMetadata) as Array<Record<string,unknown>>;
     if(!Array.isArray(metadata)||metadata.length!==images.length)return Response.json({error:"INVALID_METADATA"},{status:400});
