@@ -198,3 +198,21 @@ test("AI image generation stays server-side and powers both creation modes", asy
   assert.match(studio, /disabled=\{!issuanceReady\}/);
   assert.doesNotMatch(studio, /由 AURA Collection Engine 生成的链上数字收藏系列/);
 });
+
+test("the interface defaults to English and keeps the studio layout in normal flow", async () => {
+  const [layout, language, header, css] = await Promise.all([
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/LanguageProvider.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+  assert.match(layout, /<html lang="en">/);
+  assert.match(layout, /<LanguageProvider>/);
+  assert.match(language, /useState<AuraLanguage>\("en"\)/);
+  assert.match(language, /aura-language/);
+  assert.match(header, /className="language-toggle"/);
+  assert.match(header, /className="mobile-menu-toggle"/);
+  assert.match(css, /\.studio-steps\{top:auto!important;z-index:2\}/);
+  assert.match(css, /@media\(max-width:680px\)/);
+  assert.match(css, /\.stage-input,.metadata-stage,.mint-stage\{display:block/);
+});

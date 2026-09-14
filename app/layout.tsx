@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import {WalletProvider} from "./components/WalletProvider";
+import {LanguageProvider} from "./components/LanguageProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AURA — Robinhood Chain 原生生成式 NFT AI 平台",
-  description: "AURA 致力于打造首个基于 Robinhood Chain 的生成式 NFT AI 产品，从主体创作、系列生成、Metadata 到 Mainnet Mint，并衔接 OpenSea 展示与交易。",
+  title: "AURA — Generative NFT infrastructure for Robinhood Chain",
+  description: "Create identity-consistent NFT collections, prepare IPFS Metadata and mint on Robinhood Mainnet with AURA.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
@@ -28,11 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <WalletProvider>{children}</WalletProvider>
+        <LanguageProvider><WalletProvider>{children}</WalletProvider></LanguageProvider>
       </body>
     </html>
   );
