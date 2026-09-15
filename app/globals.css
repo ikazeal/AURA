@@ -334,3 +334,7 @@ h1,h2,h3,p,small,span,b,a,button,label,dt,dd{overflow-wrap:anywhere}
 
 /* Three verified status cards after removing the pending audit item. */
 @media(min-width:1001px){.audit-status-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* Keep the hero controls inside the copy column at intermediate desktop widths. */
+.hero-action-row{flex-wrap:wrap}
+.hero-mini-metrics{max-width:100%;flex:none}

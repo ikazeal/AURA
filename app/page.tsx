@@ -48,7 +48,7 @@ export default function Home(){
         <div className="hero-facts"><span><b>01</b> Robinhood native</span><span><b>02</b> AURA V2 contract</span><span><b>03</b> OpenSea Ready</span></div>
       </div>
       <div className="hero-demo">
-        <article className="demo-card input-demo"><header><i>1</i><b>Upload one subject image</b></header><div className="mini-tabs"><span className="active">Upload image</span><span>Text prompt</span></div><p>Lock the defining appearance of a person, character, product or IP as the identity baseline for the collection.</p><div className="upload-mini">▧<small>PNG / JPG / WEBP / PROMPT</small></div></article>
+        <article className="demo-card input-demo"><header><i>1</i><b>Upload one subject image</b></header><div className="mini-tabs"><span className="active">Upload image</span><span>Text prompt</span></div><p>Lock one subject as the collection identity.</p><div className="upload-mini">▧<small>PNG / JPG / WEBP / PROMPT</small></div></article>
         <span className="demo-arrow">→</span>
         <article className="demo-card generate-demo"><header><i>2</i><b>Generate collection assets</b></header><img src="/brand/aura-nft-01.jpg" alt="AURA Wisp NFT subject example"/><div className="fake-progress"><span/><b>68%</b></div><ul><li><i aria-hidden="true">✓</i>Preserve subject identity</li><li><i aria-hidden="true">✓</i>Compose traits and rarity</li><li><i aria-hidden="true">✓</i>Generate standard Metadata</li></ul></article>
         <span className="demo-arrow">→</span>

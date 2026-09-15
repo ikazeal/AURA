@@ -208,6 +208,7 @@ test("the interface is English-only and keeps the studio layout in normal flow",
   assert.doesNotMatch(layout, /LanguageProvider/);
   assert.doesNotMatch(header, /language-toggle|Switch language/);
   assert.match(header, /className="mobile-menu-toggle"/);
+  assert.match(css, /\.hero-action-row\{flex-wrap:wrap\}/);
   assert.match(css, /\.studio-steps\{top:auto!important;z-index:2\}/);
   assert.match(css, /@media\(max-width:680px\)/);
   assert.match(css, /\.stage-input,.metadata-stage,.mint-stage\{display:block/);
