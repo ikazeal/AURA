@@ -66,14 +66,15 @@ test("homepage communicates the Robinhood-native product and OpenSea handoff", a
   assert.match(html, /opensea\.io\/collections\/chain\/robinhood/);
 });
 
-test("audit page discloses deployment proof without claiming third-party certification", async () => {
+test("audit page presents contract security controls without pending audit messaging", async () => {
   const response = await render("/audit");
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /0x7632893B0624F7E35df9EEDF67ABec0C4c2c4D65/);
   assert.match(html, /0xd90eecdfc6f7071109c6731b8b8fa744cbc3d39adad9ac287f9657f33290e41e/);
-  assert.match(html, /Independent audit pending/);
-  assert.doesNotMatch(html, /Independent audit (?:passed|complete)/i);
+  assert.match(html, /Internal security assessment/);
+  assert.doesNotMatch(html, /Independent audit/i);
+  assert.doesNotMatch(html, /Independently verifiable deployment/i);
 });
 
 test("how-it-works page presents the production and onchain architecture", async () => {

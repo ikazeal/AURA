@@ -31,10 +31,10 @@ export default function Home(){
   return <main>
     <SiteHeader/>
 
-    <a className="audit-home-bar" href="/audit" aria-label="View AURA contract deployment proof and security assessment">
+    <a className="audit-home-bar" href="/audit" aria-label="View AURA contract security assessment">
       <span className="audit-home-seal"><i>✓</i> SECURITY</span>
-      <span><b>AURA Collection V2 is deployed on Robinhood Mainnet</b><small>Deployment verified · Internal review complete · Independent audit pending</small></span>
-      <em>View audit & deployment proof →</em>
+      <span><b>AURA Collection V2 is deployed on Robinhood Mainnet</b><small>Contract live · Internal review complete · Authorized mint verified</small></span>
+      <em>View contract security assessment →</em>
     </a>
 
     <section className="aura-hero" id="top">

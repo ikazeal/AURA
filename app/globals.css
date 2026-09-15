@@ -331,3 +331,6 @@ html,body{max-width:100%;overflow-x:hidden}
 .aura-nav nav a,.nav-actions>a,.nav-actions>button,.mainnet-dot{white-space:nowrap}
 h1,h2,h3,p,small,span,b,a,button,label,dt,dd{overflow-wrap:anywhere}
 @media(max-width:680px){.aura-nav nav a,.nav-actions>a,.nav-actions>button{overflow-wrap:normal}.studio-steps button{white-space:normal}.hero-copy h1,.section-title h2,.sub-hero h1,.studio-top h1{hyphens:auto}}
+
+/* Three verified status cards after removing the pending audit item. */
+@media(min-width:1001px){.audit-status-grid{grid-template-columns:repeat(3,1fr)}}

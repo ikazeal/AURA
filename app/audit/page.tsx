@@ -2,8 +2,8 @@ import type {Metadata} from "next";
 import SiteHeader from "../components/SiteHeader";
 
 export const metadata:Metadata={
-  title:"Contract audit and deployment proof | AURA",
-  description:"Deployment proof, internal security assessment, controls and independent audit status for AURA Collection V2 on Robinhood Mainnet.",
+  title:"Contract security assessment | AURA",
+  description:"Onchain contract details, internal security assessment and active controls for AURA Collection V2 on Robinhood Mainnet.",
 };
 
 const contract="0x7632893B0624F7E35df9EEDF67ABec0C4c2c4D65";
@@ -18,7 +18,6 @@ const checks=[
   ["Parameter binding","Passed","Payer, recipient, URI hash, quantity, value, nonce and deadline are signature-bound."],
   ["Supply and batch limits","Passed","Maximum supply is 1,000,000; each transaction may mint up to 50 tokens."],
   ["Reentrancy protection","Passed","Mint and withdrawal flows use ReentrancyGuard and failed transfers revert atomically."],
-  ["Independent audit","Pending","No formal report or certification has yet been issued by an independent security firm."],
 ] as const;
 
 const controls=[
@@ -33,9 +32,9 @@ const controls=[
 export default function AuditPage(){return <main className="audit-page">
   <SiteHeader/>
   <section className="audit-hero">
-    <div className="audit-hero-copy"><span>AURA SECURITY CENTER / REPORT AURA-SEC-2026-001</span><h1>Contract deployment proof<br/>and security assessment</h1><p>Public evidence of the AURA Collection V2 deployment, core security controls, internal review scope and outstanding independent audit work.</p><div className="audit-hero-actions"><a href={`${explorer}/address/${contract}`} target="_blank" rel="noreferrer">View contract on Explorer ↗</a><a href="#assessment">Read assessment ↓</a></div></div>
+    <div className="audit-hero-copy"><span>AURA SECURITY CENTER / REPORT AURA-SEC-2026-001</span><h1>Contract security<br/>assessment</h1><p>Onchain contract details, active security controls and the internal review scope for AURA Collection V2.</p><div className="audit-hero-actions"><a href={`${explorer}/address/${contract}`} target="_blank" rel="noreferrer">View contract on Explorer ↗</a><a href="#assessment">Read assessment ↓</a></div></div>
     <aside className="audit-certificate" aria-label="AURA internal security assessment status">
-      <header><span>AURA / SECURITY</span><i>01</i></header><div className="audit-shield">✓</div><small>ASSESSMENT STATUS</small><h2>Internal security assessment<br/><em>Complete</em></h2><p>Deployment and critical controls verified.<br/>This statement is not a third-party audit certification.</p><footer><span>2026-09-12</span><b>ROBINHOOD MAINNET · 4663</b></footer>
+      <header><span>AURA / SECURITY</span><i>01</i></header><div className="audit-shield">✓</div><small>ASSESSMENT STATUS</small><h2>Internal security assessment<br/><em>Complete</em></h2><p>Deployment parameters and critical contract controls reviewed.</p><footer><span>2026-09-12</span><b>ROBINHOOD MAINNET · 4663</b></footer>
     </aside>
   </section>
 
@@ -43,11 +42,9 @@ export default function AuditPage(){return <main className="audit-page">
     <article className="passed"><i>✓</i><span><small>ONCHAIN DEPLOYMENT</small><b>Mainnet deployment verified</b></span></article>
     <article className="passed"><i>✓</i><span><small>INTERNAL REVIEW</small><b>Internal security assessment complete</b></span></article>
     <article className="passed"><i>✓</i><span><small>FUNCTION CHECK</small><b>Authorized mint flow verified</b></span></article>
-    <article className="pending"><i>!</i><span><small>INDEPENDENT AUDIT</small><b>Independent audit pending</b></span></article>
   </section>
 
   <section className="audit-deployment">
-    <div className="audit-section-title"><span>01 / DEPLOYMENT PROOF</span><h2>Independently verifiable deployment</h2><p>The following identifiers can be verified independently through the Robinhood Chain explorer or RPC.</p></div>
     <div className="deployment-card"><header><div><i/>LIVE CONTRACT</div><b>AURA Collection V2</b></header><dl>
       <div><dt>Network</dt><dd>Robinhood Mainnet · Chain ID 4663</dd></div>
       <div><dt>Contract address</dt><dd><a href={`${explorer}/address/${contract}`} target="_blank" rel="noreferrer">{contract} ↗</a></dd></div>
@@ -71,8 +68,8 @@ export default function AuditPage(){return <main className="audit-page">
   </section>
 
   <section className="audit-boundary">
-    <div><span>04 / ASSURANCE BOUNDARY</span><h2>Assurance boundary and outstanding work</h2><p>Professional security disclosure must state both what has and has not been verified. This page documents AURA's internal technical assessment and onchain deployment evidence; it is <strong>not an audit certificate issued by an independent security firm.</strong></p></div>
-    <ol><li><b>Explorer source verification</b><span>Blockscout currently shows unverified source. Compiler version, optimizer settings and constructor arguments should be submitted.</span></li><li><b>Independent audit</b><span>Before operating at scale, an independent firm should review business logic, permissions, signing services and failure paths.</span></li><li><b>Production key and permission governance</b><span>The owner should migrate to a multisig wallet; the authorized signer should use an isolated production key with rotation and monitoring.</span></li><li><b>Infrastructure and asset availability</b><span>Pinata/IPFS, RPC and publishing endpoints require rate limits, alerts, backups and recovery procedures.</span></li></ol>
+    <div><span>04 / ASSURANCE BOUNDARY</span><h2>Operational security priorities</h2><p>This page documents AURA's internal technical assessment, deployed contract parameters and active onchain controls.</p></div>
+    <ol><li><b>Explorer source verification</b><span>Compiler version, optimizer settings and constructor arguments should remain available with the deployed source.</span></li><li><b>Production key and permission governance</b><span>The owner should migrate to a multisig wallet; the authorized signer should use an isolated production key with rotation and monitoring.</span></li><li><b>Infrastructure and asset availability</b><span>Pinata/IPFS, RPC and publishing endpoints require rate limits, alerts, backups and recovery procedures.</span></li></ol>
   </section>
 
   <section className="audit-cta"><span>VERIFY, THEN PUBLISH</span><h2>Verify every step before signing.</h2><div><a href="/studio">Launch Studio →</a><a href="/whitepaper">Read the whitepaper</a></div></section>
