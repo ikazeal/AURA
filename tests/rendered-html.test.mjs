@@ -64,6 +64,7 @@ test("homepage communicates the Robinhood-native product and OpenSea handoff", a
   assert.match(html, /OpenSea Ready/);
   assert.match(html, /Display \/ list \/ trade/);
   assert.match(html, /opensea\.io\/collections\/chain\/robinhood/);
+  assert.match(html, /https:\/\/x\.com\/RbAuramint/);
 });
 
 test("audit page presents contract security controls without pending audit messaging", async () => {

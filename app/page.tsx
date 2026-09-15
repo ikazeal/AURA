@@ -15,7 +15,7 @@ const resourceLinks=[
   {name:"IPFS",detail:"Decentralized storage protocol",href:"https://ipfs.tech/"},
   {name:"OpenZeppelin",detail:"Smart contract standards",href:"https://www.openzeppelin.com/"},
 ] as const;
-const auraX=process.env.NEXT_PUBLIC_AURA_X_URL;
+const auraX=process.env.NEXT_PUBLIC_AURA_X_URL||"https://x.com/RbAuramint";
 const industryCases=[
   {name:"CryptoPunks",type:"Generative identity",image:"/brand/case-punk-0001.png",imageClass:"pixel",scale:"10,000",volume:"$3.07B",volumeLabel:"Lifetime sales",asOf:"NODE Foundation · 2025-04",value:"A consistent pixel-character system and rarity model created a recognizable internet-native cultural icon.",revenue:"The initial 2017 public claim cost 0 ETH plus gas. Later value came from collector demand, secondary trading and cultural reach; a free early claim does not represent later buyer outcomes.",source:"https://hub.cryptopunks.app/cryptopunks-join-the-node-foundation"},
   {name:"Pudgy Penguins",type:"NFT IP & community",image:"/brand/case-pudgy-nft.png",scale:"8,888",volume:"$396.88M",volumeLabel:"Historical volume",asOf:"CryptoSlam data · 2024-08-06",value:"Expanded from onchain characters into community, licensing, physical toys and Pudgy World.",revenue:"Potential value paths include secondary trading, character licensing and physical products. Holder outcomes depend on licensing terms, purchase cost and market demand.",source:"https://media.pudgypenguins.com/post/pudgytoys"},
@@ -102,7 +102,7 @@ export default function Home(){
 
     <footer className="site-footer" id="footer">
       <div className="footer-main">
-        <div className="footer-intro"><a className="aura-brand" href="#top"><img src="/brand/aura-logo.png" alt="AURA"/><span><b>AURA</b><small>COLLECTION ENGINE</small></span></a><p>From a creative subject to an onchain collection—generate, structure Metadata and publish on Robinhood Chain.</p><div className="footer-socials" aria-label="Official AURA community">{auraX?<a href={auraX} target="_blank" rel="noopener noreferrer" aria-label="AURA X">𝕏 <span>X</span> ↗</a>:<span title="Available after NEXT_PUBLIC_AURA_X_URL is configured">𝕏 <b>X · coming soon</b></span>}</div></div>
+        <div className="footer-intro"><a className="aura-brand" href="#top"><img src="/brand/aura-logo.png" alt="AURA"/><span><b>AURA</b><small>COLLECTION ENGINE</small></span></a><p>From a creative subject to an onchain collection—generate, structure Metadata and publish on Robinhood Chain.</p><div className="footer-socials" aria-label="Official AURA community"><a href={auraX} target="_blank" rel="noopener noreferrer" aria-label="AURA on X">𝕏 <span>@RbAuramint</span> ↗</a></div></div>
         <nav className="footer-nav" aria-label="AURA page"><b>Product</b><a href="#features">Product</a><a href="/studio">Studio</a><a href="/cases">Collections</a><a href="/how-it-works">How it works</a><a href="/whitepaper">Whitepaper</a><a href="/audit">Contract audit</a></nav>
         <div className="footer-resources"><b>Ecosystem & tools</b><div>{resourceLinks.map(link=><a href={link.href} target="_blank" rel="noopener noreferrer" key={link.name}><span><strong>{link.name}</strong><small>{link.detail}</small></span><i>↗</i></a>)}</div></div>
       </div>
