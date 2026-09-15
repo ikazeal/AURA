@@ -1,7 +1,6 @@
 export const industryProjects=[
-  {name:"CryptoPunks",category:"Generative Art",count:"10,000",image:"/brand/case-punk-0001.png",url:"https://nodefoundation.com/cryptopunks"},
-  {name:"Pudgy Penguins",category:"Character IP",count:"8,888",image:"/brand/case-pudgy-nft.png",url:"https://www.pudgypenguins.com/"},
-  {name:"Bored Ape Yacht Club",category:"PFP Community",count:"10,000",image:"/brand/bayc-candidate-3.jpg",url:"https://boredapeyachtclub.com/"},
-  {name:"Azuki",category:"Anime IP",count:"10,000",image:"/brand/case-azuki.jpg",url:"https://www.azuki.com/about"},
-  {name:"Doodles",category:"Entertainment IP",count:"10,000",image:"/brand/case-doodles.svg",url:"https://www.doodles.app/"},
+  {name:"RACCOONHOOD",category:"Sticker PFP",count:"3,333",image:"/brand/recent-raccoonhood-card.webp",url:"https://raccoonhood.wtf/"},
+  {name:"Script Kiddies",category:"Onchain Agents",count:"10,000",image:"/brand/recent-script-kiddies-card.webp",url:"https://scriptkiddies.com/"},
+  {name:"Robacha Capsules",category:"Utility Collection",count:"1,000",image:"/brand/recent-robacha-market-card.webp",url:"https://www.robacha.fun/marketplace"},
+  {name:"The Robin Hood",category:"Community PFP",count:"2,500",image:"/brand/recent-the-robin-hood-card.webp",url:"https://opensea.io/collection/therobinhood/overview"},
 ] as const;

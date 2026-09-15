@@ -44,7 +44,7 @@ export default function Home(){
         <span className="hero-pill"><i/> ROBINHOOD CHAIN-NATIVE · GENERATIVE NFT AI</span>
         <h1>The first AI image platform<br/><em>built on Robinhood Chain.</em></h1>
         <p>Describe or upload one subject to generate <strong>identity-consistent, visually distinct</strong> NFT visuals. Complete Metadata, IPFS and Mainnet Mint, then display or trade on OpenSea.</p>
-        <div className="hero-action-row"><div className="hero-buttons"><a href="/studio">Create NFT Collection <b>→</b></a><a className="hero-secondary" href="/how-it-works">View architecture <b>→</b></a></div><div className="hero-mini-metrics" aria-label="AURA usage data"><span><b>200<sup>+</sup></b><small>early users</small></span><i/><span><b>4</b><small>ecosystem integrations</small></span></div></div>
+        <div className="hero-action-row"><div className="hero-buttons"><a href="/studio">Create NFT Collection <b>→</b></a><a className="hero-secondary" href="/how-it-works">View architecture <b>→</b></a></div><div className="hero-mini-metrics" aria-label="AURA usage data"><span><b>100<sup>+</sup></b><small>early users</small></span><i/><span><b>4</b><small>ecosystem integrations</small></span></div></div>
         <div className="hero-facts"><span><b>01</b> Robinhood native</span><span><b>02</b> AURA V2 contract</span><span><b>03</b> OpenSea Ready</span></div>
       </div>
       <div className="hero-demo">
@@ -61,7 +61,7 @@ export default function Home(){
     </section>
 
     <section className="ecosystem-strip">
-      <header><div><span>BRANDS USING AURA</span><h2>NFT brands using AURA</h2></div></header>
+      <header><div><span>RECENT ON ROBINHOOD CHAIN</span><h2>New NFT collections across the ecosystem</h2></div></header>
       <div className="ecosystem-window"><div className="ecosystem-track">{[0,1,2,3,4].map(group=><div className="ecosystem-group" key={group} aria-hidden={group>0}>{industryProjects.map(item=><a href={item.url} target="_blank" rel="noreferrer" key={`${item.name}-${group}`}><img src={item.image} alt=""/><span><b>{item.name}</b><small>{item.category} · {item.count}</small></span><i>↗</i></a>)}</div>)}</div></div>
     </section>
 
