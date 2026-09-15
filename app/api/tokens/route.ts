@@ -29,7 +29,7 @@ export async function GET(request:NextRequest){
         if(!response.ok)throw new Error("METADATA_UNAVAILABLE");
         const metadata=await response.json() as {name?:string;description?:string;image?:string;attributes?:Array<{trait_type?:string;value?:string|number}>};
         return {contract:requested,tokenId,tokenUri,metadataUrl:gatewayUrl(tokenUri),name:metadata.name||`AURA #${tokenId}`,description:metadata.description||"",image:metadata.image?gatewayUrl(metadata.image):"",attributes:Array.isArray(metadata.attributes)?metadata.attributes:[]};
-      }catch{return {contract:requested,tokenId,tokenUri,metadataUrl:gatewayUrl(tokenUri),name:`AURA #${tokenId}`,description:"Metadata 已上链，公共网关正在同步。",image:"",attributes:[]}}
+      }catch{return {contract:requested,tokenId,tokenUri,metadataUrl:gatewayUrl(tokenUri),name:`AURA #${tokenId}`,description:"Metadata is onchain; the public gateway is syncing.",image:"",attributes:[]}}
     }));
     return NextResponse.json({tokens},{headers:{"Cache-Control":"public, max-age=60, stale-while-revalidate=600"}});
   }catch(error){

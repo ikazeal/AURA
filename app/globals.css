@@ -218,7 +218,7 @@ body{font-size:15px;line-height:1.55}.aura-nav nav{font-size:15px}.mainnet-dot{f
 .studio-steps{top:auto!important;z-index:2}
 .studio-stage{z-index:1}
 
-.language-toggle,.mobile-menu-toggle{min-width:38px;height:38px;padding:0 10px;border:1px solid #d8e4df;border-radius:6px;background:#fff;color:#314139;font-size:11px;font-weight:700}
+.mobile-menu-toggle{min-width:38px;height:38px;padding:0 10px;border:1px solid #d8e4df;border-radius:6px;background:#fff;color:#314139;font-size:11px;font-weight:700}
 .aura-nav nav a,.nav-actions>*{white-space:nowrap}
 .mobile-menu-toggle,.mobile-nav{display:none}
 
@@ -238,7 +238,6 @@ body{font-size:15px;line-height:1.55}.aura-nav nav{font-size:15px}.mainnet-dot{f
   .aura-brand b{font-size:18px;letter-spacing:2.2px}
   .aura-brand small,.mainnet-dot,.history-link,.nav-cta{display:none!important}
   .nav-actions{margin-left:auto;gap:7px}
-  .language-toggle{display:block;height:38px;padding:0 9px}
   .wallet-link{width:38px;height:38px;display:grid!important;place-items:center;padding:0!important;border-radius:6px!important}
   .wallet-link img,.wallet-link>i,.wallet-glyph{margin:0!important}
   .mobile-menu-toggle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0}
@@ -325,3 +324,10 @@ body{font-size:15px;line-height:1.55}.aura-nav nav{font-size:15px}.mainnet-dot{f
   .transaction-ready{align-items:flex-start;grid-template-columns:auto 1fr}
   .transaction-ready>a{grid-column:1/-1;width:100%;text-align:center}
 }
+
+/* Keep long English labels inside their layout columns at every viewport. */
+html,body{max-width:100%;overflow-x:hidden}
+.aura-nav,.aura-nav nav,.nav-actions,.hero-copy,.hero-demo,.demo-card,.why-intro,.why-list,.section-title,.value-heading,.value-cards,.studio-top,.studio-steps,.studio-stage,.stage-input>*,.metadata-stage>*,.mint-stage>*,.history-columns>*,.whitepaper-layout>*,.hiw-section-head>*,.layer-stack>*,.audit-status-grid>*{min-width:0}
+.aura-nav nav a,.nav-actions>a,.nav-actions>button,.mainnet-dot{white-space:nowrap}
+h1,h2,h3,p,small,span,b,a,button,label,dt,dd{overflow-wrap:anywhere}
+@media(max-width:680px){.aura-nav nav a,.nav-actions>a,.nav-actions>button{overflow-wrap:normal}.studio-steps button{white-space:normal}.hero-copy h1,.section-title h2,.sub-hero h1,.studio-top h1{hyphens:auto}}

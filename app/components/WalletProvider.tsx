@@ -47,27 +47,27 @@ export function WalletProvider({children}:{children:React.ReactNode}){
 
   const switchChain=useCallback(async(provider:Eip1193Provider)=>{try{await provider.request({method:"wallet_switchEthereumChain",params:[{chainId:CHAIN.chainId}]})}catch(error){const code=(error as {code?:number}).code;if(code!==4902&&code!==-32603)throw error;await provider.request({method:"wallet_addEthereumChain",params:[CHAIN]})}const current=await provider.request({method:"eth_chainId"}) as string;if(current.toLowerCase()!==CHAIN.chainId)throw new Error("WRONG_CHAIN");setChainId(current);return true},[]);
 
-  const connect=async(option:WalletOption)=>{setBusy(option.info.uuid);setMessage("");try{const accounts=await option.provider.request({method:"eth_requestAccounts"}) as string[];if(!accounts[0])throw new Error("NO_ACCOUNT");await switchChain(option.provider);setActive(option);setWallet(accounts[0]);setRememberedWallet(accounts[0]);localStorage.setItem("aura-wallet-session",JSON.stringify({uuid:option.info.uuid,rdns:option.info.rdns,name:option.info.name,address:accounts[0]}));setOpen(false)}catch(error){setMessage((error as Error).message.includes("WRONG_CHAIN")?"仅支持 Robinhood Mainnet（Chain ID 4663）":"连接未完成，请在钱包中确认授权和网络切换。")}finally{setBusy("")}};
+  const connect=async(option:WalletOption)=>{setBusy(option.info.uuid);setMessage("");try{const accounts=await option.provider.request({method:"eth_requestAccounts"}) as string[];if(!accounts[0])throw new Error("NO_ACCOUNT");await switchChain(option.provider);setActive(option);setWallet(accounts[0]);setRememberedWallet(accounts[0]);localStorage.setItem("aura-wallet-session",JSON.stringify({uuid:option.info.uuid,rdns:option.info.rdns,name:option.info.name,address:accounts[0]}));setOpen(false)}catch(error){setMessage((error as Error).message.includes("WRONG_CHAIN")?"Only Robinhood Mainnet is supported (Chain ID 4663)":"Connection incomplete. Approve the request and network switch in your wallet.")}finally{setBusy("")}};
   const disconnect=useCallback(async()=>{if(active)try{await active.provider.request({method:"wallet_revokePermissions",params:[{eth_accounts:{}}]})}catch{setMessage("")}clear();setOpen(false)},[active,clear]);
   const ensureRobinhood=useCallback(async()=>active?switchChain(active.provider):false,[active,switchChain]);
   const value=useMemo(()=>({wallet,rememberedWallet,walletName:active?.info.name||"",walletIcon:active?.info.icon||"",chainId,connected:Boolean(wallet&&active),provider:active?.provider||null,openWallets:()=>setOpen(true),disconnect,ensureRobinhood}),[wallet,rememberedWallet,active,chainId,disconnect,ensureRobinhood]);
 
   return <WalletContext.Provider value={value}>
     {children}
-    {open&&<div className="wallet-modal" role="dialog" aria-modal="true" aria-label="连接钱包">
+    {open&&<div className="wallet-modal" role="dialog" aria-modal="true" aria-label="Connect wallet">
       <section>
-        <button className="wallet-close" onClick={()=>setOpen(false)} aria-label="关闭钱包窗口">×</button>
-        <header><span>ROBINHOOD MAINNET</span><h2>{wallet?"钱包已连接":"选择钱包"}</h2><p>{wallet?"管理当前连接，或安全断开本地会话。":"连接支持 EIP‑6963 的 EVM 钱包，并自动切换至 Robinhood Chain。"}</p></header>
+        <button className="wallet-close" onClick={()=>setOpen(false)} aria-label="Close wallet dialog">×</button>
+        <header><span>ROBINHOOD MAINNET</span><h2>{wallet?"Wallet connected":"Choose a wallet"}</h2><p>{wallet?"Manage this connection or safely end the local session.":"Connect an EIP-6963 compatible EVM wallet and switch to Robinhood Chain automatically."}</p></header>
         {wallet?<div className="wallet-connected">
-          <div>{active?.info.icon?<img src={active.info.icon} alt=""/>:<i className="wallet-fallback-logo">{active?.info.name.slice(0,1)}</i>}<span><b>{active?.info.name}</b><small>{wallet.slice(0,6)}…{wallet.slice(-4)}</small></span><em>已连接</em></div>
-          <dl><div><dt>网络</dt><dd>Robinhood Mainnet</dd></div><div><dt>Chain ID</dt><dd>4663</dd></div><div><dt>Gas Token</dt><dd>ETH</dd></div></dl>
-          <a className="wallet-history-link" href="/history" onClick={()=>setOpen(false)}>查看我的创作与链上记录 <span>→</span></a>
-          <button className="wallet-disconnect" onClick={disconnect}>断开钱包连接</button>
+          <div>{active?.info.icon?<img src={active.info.icon} alt=""/>:<i className="wallet-fallback-logo">{active?.info.name.slice(0,1)}</i>}<span><b>{active?.info.name}</b><small>{wallet.slice(0,6)}…{wallet.slice(-4)}</small></span><em>Connected</em></div>
+          <dl><div><dt>Network</dt><dd>Robinhood Mainnet</dd></div><div><dt>Chain ID</dt><dd>4663</dd></div><div><dt>Gas Token</dt><dd>ETH</dd></div></dl>
+          <a className="wallet-history-link" href="/history" onClick={()=>setOpen(false)}>View creations and onchain activity <span>→</span></a>
+          <button className="wallet-disconnect" onClick={disconnect}>Disconnect wallet</button>
         </div>:<>
-          <div className="detected-wallets">{options.length?options.map(option=><button key={option.info.uuid} onClick={()=>connect(option)} disabled={Boolean(busy)}>{option.info.icon?<img src={option.info.icon} alt=""/>:<i className="wallet-fallback-logo">{option.info.name.slice(0,1)}</i>}<span><b>{option.info.name}</b><small>{busy===option.info.uuid?"等待钱包确认…":"已检测到 · 点击连接"}</small></span><em>→</em></button>):<div className="no-wallet"><b>未检测到浏览器钱包</b><p>请安装下方任一兼容钱包，然后刷新页面。</p></div>}</div>
-          <div className="supported-wallets"><small>兼容钱包</small><div>{fallbackWallets.map(item=><a href={item.url} target="_blank" rel="noreferrer" key={item.name}><WalletBrandIcon name={item.name}/><span>{item.name}</span></a>)}</div></div>
+          <div className="detected-wallets">{options.length?options.map(option=><button key={option.info.uuid} onClick={()=>connect(option)} disabled={Boolean(busy)}>{option.info.icon?<img src={option.info.icon} alt=""/>:<i className="wallet-fallback-logo">{option.info.name.slice(0,1)}</i>}<span><b>{option.info.name}</b><small>{busy===option.info.uuid?"Waiting for wallet approval…":"Detected · Connect"}</small></span><em>→</em></button>):<div className="no-wallet"><b>No browser wallet detected</b><p>Install a compatible wallet below, then refresh the page.</p></div>}</div>
+          <div className="supported-wallets"><small>Compatible wallets</small><div>{fallbackWallets.map(item=><a href={item.url} target="_blank" rel="noreferrer" key={item.name}><WalletBrandIcon name={item.name}/><span>{item.name}</span></a>)}</div></div>
           {message&&<p className="wallet-error">{message}</p>}
-          <footer><img src="/brand/robinhood.ico" alt="Robinhood"/><span><b>仅限 Robinhood Chain</b><small>Chain ID 4663 · Gas ETH</small></span></footer>
+          <footer><img src="/brand/robinhood.ico" alt="Robinhood"/><span><b>Robinhood Chain only</b><small>Chain ID 4663 · Gas ETH</small></span></footer>
         </>}
       </section>
     </div>}

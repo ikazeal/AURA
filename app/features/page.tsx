@@ -1,12 +1,12 @@
 import SiteHeader from "../components/SiteHeader";
 
 const features=[
-  ["01","主体一致性引擎","锁定角色轮廓、面部、Logo 与关键结构，只让服装、材质、配件、动作和场景发生可控变化。"],
-  ["02","快速批量变体","单次请求快速生成最多 4 张候选图，并可连续创建多个批次扩展完整系列，减少逐张等待与重复操作。"],
-  ["03","属性与稀有度编排","建立 Trait 分类、组合限制和出现概率，避免冲突属性，并形成可解释的稀有度体系。"],
-  ["04","标准元数据输出","为每件作品生成名称、编号、描述、属性与标准 JSON，图片和元数据一一对应。"],
-  ["05","人工筛选与重生成","在正式发行前完成预览、筛选、锁定和局部重生成，让创作者保留最终决定权。"],
-  ["06","Robinhood 主网发布","连接兼容钱包，完成系列配置、Mint 与链上展示，把生成资产衔接到发行流程。"],
+  ["01","Subject consistency engine","Lock silhouette, face, logo and key structures while varying outfits, materials, accessories, poses and scenes."],
+  ["02","Fast batch variations","Generate up to four candidates per request, then run additional batches to grow the collection without one-by-one waiting."],
+  ["03","Trait and rarity orchestration","Define trait categories, combination rules and probabilities to prevent conflicts and create explainable rarity."],
+  ["04","Standard metadata output","Create names, IDs, descriptions, traits and standard JSON with a one-to-one asset mapping."],
+  ["05","Human review and regeneration","Preview, select, lock and regenerate before publishing so creators keep final control."],
+  ["06","Robinhood Mainnet publishing","Connect a compatible wallet to configure, mint and display generated assets onchain."],
 ] as const;
 
-export default function Features(){return <main><SiteHeader/><section className="sub-hero"><span>PRODUCT CAPABILITIES</span><h1>从一张照片，快速完成一个<br/><em>可发行的 NFT 系列。</em></h1><p>AURA 不止生成单张图片，而是把主体控制、批量变体、轻量输出、属性编排、元数据和上链准备整合为一套工作流。</p><a href="/studio">进入创作引擎 →</a></section><section className="feature-page-grid">{features.map(x=><article key={x[0]}><i>{x[0]}</i><h2>{x[1]}</h2><p>{x[2]}</p></article>)}</section><section className="page-cta"><span>ONE SUBJECT · THOUSANDS OF POSSIBILITIES</span><h2>让规模化生成，仍然保持品牌一致。</h2><a href="/how-it-works">查看工作原理 →</a></section></main>}
+export default function Features(){return <main><SiteHeader/><section className="sub-hero"><span>PRODUCT CAPABILITIES</span><h1>Turn one image into a<br/><em>publish-ready NFT collection.</em></h1><p>AURA unifies subject control, batch variations, optimized assets, trait orchestration, metadata and onchain preparation in one workflow.</p><a href="/studio">Launch Studio →</a></section><section className="feature-page-grid">{features.map(x=><article key={x[0]}><i>{x[0]}</i><h2>{x[1]}</h2><p>{x[2]}</p></article>)}</section><section className="page-cta"><span>ONE SUBJECT · THOUSANDS OF POSSIBILITIES</span><h2>Scale generation without losing brand consistency.</h2><a href="/how-it-works">See how it works →</a></section></main>}

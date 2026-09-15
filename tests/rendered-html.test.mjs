@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import test, { after } from "node:test";
 
 const port = 3400 + (process.pid % 500);
@@ -46,9 +46,8 @@ test("only unminted creations can be restored for IPFS publish and mint", async 
     readFile(new URL("../app/lib/creation-history.ts", import.meta.url), "utf8"),
   ]);
   assert.match(history, /\/studio\?restore=/);
-  assert.match(history, /继续上传 \/ Mint/);
-  assert.match(history, /发行已完成 · 不可重复 Mint/);
-  assert.doesNotMatch(history, /再次发行/);
+  assert.match(history, /Continue upload \/ Mint/);
+  assert.match(history, /Published · cannot be minted again/);
   assert.match(studio, /URLSearchParams\(window\.location\.search\)/);
   assert.match(studio, /if\(record\.status==="minted"\)\{window\.location\.replace\("\/history"\)/);
   assert.match(studio, /record\.assets/);
@@ -60,10 +59,10 @@ test("homepage communicates the Robinhood-native product and OpenSea handoff", a
   const response = await render("/");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /首个基于 Robinhood Chain 的[\s\S]*AI 图片平台/);
+  assert.match(html, /first AI image platform[\s\S]*built on Robinhood Chain/i);
   assert.match(html, /ROBINHOOD CHAIN-NATIVE · GENERATIVE NFT AI/);
   assert.match(html, /OpenSea Ready/);
-  assert.match(html, /展示、挂牌与二级交易/);
+  assert.match(html, /Display \/ list \/ trade/);
   assert.match(html, /opensea\.io\/collections\/chain\/robinhood/);
 });
 
@@ -73,19 +72,19 @@ test("audit page discloses deployment proof without claiming third-party certifi
   const html = await response.text();
   assert.match(html, /0x7632893B0624F7E35df9EEDF67ABec0C4c2c4D65/);
   assert.match(html, /0xd90eecdfc6f7071109c6731b8b8fa744cbc3d39adad9ac287f9657f33290e41e/);
-  assert.match(html, /第三方独立审计待完成/);
-  assert.doesNotMatch(html, /第三方(?:独立)?审计(?:已经|已)?通过/);
+  assert.match(html, /Independent audit pending/);
+  assert.doesNotMatch(html, /Independent audit (?:passed|complete)/i);
 });
 
 test("how-it-works page presents the production and onchain architecture", async () => {
   const response = await render("/how-it-works");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /创造性输出/);
+  assert.match(html, /Creative output/);
   assert.match(html, /EIP-712/);
   assert.match(html, /Robinhood Mainnet/);
   assert.match(html, /0x7632893B0624F7E35df9EEDF67ABec0C4c2c4D65/);
-  assert.match(html, /质量与数据验证/);
+  assert.match(html, /Quality and data validation/);
 });
 
 test("wallet integration is locked to Robinhood Mainnet", async () => {
@@ -131,10 +130,10 @@ test("confirmed mints open the OpenSea listing guide", async () => {
   const studio = await readFile(new URL("../app/studio/page.tsx", import.meta.url), "utf8");
   assert.match(studio, /if\(mintConfirmed\)setShowMarketGuide\(true\)/);
   assert.match(studio, /showMarketGuide&&mintConfirmed/);
-  assert.match(studio, /NFT 已成功 Mint/);
+  assert.match(studio, /NFTs minted successfully/);
   assert.match(studio, /https:\/\/opensea\.io\/account/);
-  assert.match(studio, /前往 OpenSea 上架/);
-  assert.match(studio, /AURA 不自动替你挂牌/);
+  assert.match(studio, /List on OpenSea/);
+  assert.match(studio, /AURA never lists automatically/);
 });
 
 test("AI image generation stays server-side and powers both creation modes", async () => {
@@ -171,50 +170,62 @@ test("AI image generation stays server-side and powers both creation modes", asy
   assert.match(studio, /mode:"collection"/);
   assert.match(studio, /appendPublishImages/);
   assert.match(studio, /form\.append\("imageUrls"/);
-  assert.match(studio, /AURA 图像引擎已连接/);
+  assert.match(studio, /AURA image engine connected/);
   assert.doesNotMatch(studio, /QuickRouter/);
   assert.doesNotMatch(studio, /gpt-image-2\.5-sunburst/);
-  assert.doesNotMatch(studio, /快速批量工作流/);
-  assert.match(studio, /锁定主体身份并快速扩展服装、配件、材质、场景与稀有属性/);
+  assert.match(studio, /Lock the subject identity, then expand outfits, accessories, materials, scenes and rarity traits/);
   assert.doesNotMatch(studio, /createVariants/);
   assert.doesNotMatch(studio, /requestSingleAiImage/);
   assert.match(studio, /body:JSON\.stringify\(payload\)/);
-  assert.match(studio, /生成主体/);
-  assert.match(studio, /生成数量/);
+  assert.match(studio, /Generate subject/);
+  assert.match(studio, /Output count/);
   assert.match(studio, /Math\.min\(4,Number\(amount\)/);
   assert.match(studio, /const \[source,setSource\]=useState\(""\)/);
   assert.match(studio, /useState<"text"\|"upload">\("text"\)/);
   assert.match(studio, /const \[subjectDescription,setSubjectDescription\]=useState\(""\)/);
   assert.match(studio, /const \[prompt,setPrompt\]=useState\(""\)/);
-  assert.match(studio, /placeholder="例如：一只圆润的非人类 AURA 能量精灵/);
-  assert.match(studio, /placeholder="例如：保持精灵轮廓、面罩比例与星芒核心/);
+  assert.match(studio, /placeholder="Example: a rounded non-human AURA Wisp/);
+  assert.match(studio, /placeholder="Example: preserve the Wisp silhouette/);
   assert.match(studio, /inputMode==="upload"&&!source/);
   assert.match(studio, /source\?"has-image":"empty"/);
-  assert.match(studio, /选择主体图片/);
+  assert.match(studio, /Choose subject image/);
   assert.match(studio, /!prompt\.trim\(\)/);
   assert.match(studio, /useState\(""\);const \[symbol,setSymbol\]=useState\(""\)/);
-  assert.match(studio, /placeholder="例如：AURA Genesis"/);
-  assert.match(studio, /示例不会写入链上/);
+  assert.match(studio, /placeholder="Example: AURA Genesis"/);
+  assert.match(studio, /Examples are not written onchain/);
   assert.match(studio, /disabled=\{!issuanceReady\}/);
-  assert.doesNotMatch(studio, /由 AURA Collection Engine 生成的链上数字收藏系列/);
+  assert.doesNotMatch(studio, /generated onchain collectible series/i);
 });
 
-test("the interface defaults to English and keeps the studio layout in normal flow", async () => {
-  const [layout, language, header, css] = await Promise.all([
+test("the interface is English-only and keeps the studio layout in normal flow", async () => {
+  const [layout, header, css] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/components/LanguageProvider.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
   assert.match(layout, /<html lang="en">/);
-  assert.match(layout, /<LanguageProvider>/);
-  assert.match(language, /useState<AuraLanguage>\("en"\)/);
-  assert.match(language, /aura-language/);
-  assert.match(language, /if\(node\.nodeValue!==translated\)node\.nodeValue=translated/);
-  assert.doesNotMatch(language, /\["张"," images"\]/);
-  assert.match(header, /className="language-toggle"/);
+  assert.doesNotMatch(layout, /LanguageProvider/);
+  assert.doesNotMatch(header, /language-toggle|Switch language/);
   assert.match(header, /className="mobile-menu-toggle"/);
   assert.match(css, /\.studio-steps\{top:auto!important;z-index:2\}/);
   assert.match(css, /@media\(max-width:680px\)/);
   assert.match(css, /\.stage-input,.metadata-stage,.mint-stage\{display:block/);
+});
+
+test("application source and rendered pages contain no Chinese UI copy", async () => {
+  async function sourceFiles(url) {
+    const entries = await readdir(url, { withFileTypes: true });
+    const nested = await Promise.all(entries.map((entry) => {
+      const child = new URL(`${entry.name}${entry.isDirectory() ? "/" : ""}`, url);
+      return entry.isDirectory() ? sourceFiles(child) : /\.(?:ts|tsx)$/.test(entry.name) ? [child] : [];
+    }));
+    return nested.flat();
+  }
+  for (const file of await sourceFiles(new URL("../app/", import.meta.url))) {
+    assert.doesNotMatch(await readFile(file, "utf8"), /[\u3400-\u9fff]/, file.pathname);
+  }
+  for (const path of ["/", "/features", "/cases", "/how-it-works", "/whitepaper", "/audit", "/studio", "/history"]) {
+    const html = await (await render(path)).text();
+    assert.doesNotMatch(html, /[\u3400-\u9fff]/, path);
+  }
 });
