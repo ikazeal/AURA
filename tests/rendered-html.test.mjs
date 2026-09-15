@@ -145,8 +145,10 @@ test("confirmed mints open the OpenSea listing guide", async () => {
   assert.match(studio, /if\(mintConfirmed\)setShowMarketGuide\(true\)/);
   assert.match(studio, /showMarketGuide&&mintConfirmed/);
   assert.match(studio, /NFTs minted successfully/);
-  assert.match(studio, /https:\/\/opensea\.io\/account/);
-  assert.match(studio, /List on OpenSea/);
+  assert.match(studio, /BatchMinted/);
+  assert.match(studio, /https:\/\/opensea\.io\/item\/robinhood/);
+  assert.match(studio, /View minted NFT on OpenSea/);
+  assert.doesNotMatch(studio, /https:\/\/opensea\.io\/account/);
   assert.match(studio, /AURA never lists automatically/);
 });
 
