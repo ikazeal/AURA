@@ -338,3 +338,5 @@ h1,h2,h3,p,small,span,b,a,button,label,dt,dd{overflow-wrap:anywhere}
 /* Keep the hero controls inside the copy column at intermediate desktop widths. */
 .hero-action-row{flex-wrap:wrap}
 .hero-mini-metrics{max-width:100%;flex:none}
+
+.scale-note{margin:10px 0 0;padding:10px 12px;border-left:2px solid #9fc7b8;background:#f5f8f6;color:#6f7c76;font-size:11px;line-height:1.65}.scale-note b{color:#344a41}

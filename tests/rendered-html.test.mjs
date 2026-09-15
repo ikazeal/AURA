@@ -182,6 +182,10 @@ test("AI image generation stays server-side and powers both creation modes", asy
   assert.match(studio, /Generate subject/);
   assert.match(studio, /Output count/);
   assert.match(studio, /Math\.min\(4,Number\(amount\)/);
+  assert.match(studio, /4 images · current limit/);
+  assert.match(studio, /50 images · coming soon/);
+  assert.match(studio, /3,333 images · coming soon/);
+  assert.match(studio, /Small-batch testing only/);
   assert.match(studio, /const \[source,setSource\]=useState\(""\)/);
   assert.match(studio, /useState<"text"\|"upload">\("text"\)/);
   assert.match(studio, /const \[subjectDescription,setSubjectDescription\]=useState\(""\)/);
