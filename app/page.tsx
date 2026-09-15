@@ -14,6 +14,10 @@ const resourceLinks=[
   {name:"Pinata",detail:"IPFS storage",href:"https://pinata.cloud/"},
   {name:"IPFS",detail:"Decentralized storage protocol",href:"https://ipfs.tech/"},
   {name:"OpenZeppelin",detail:"Smart contract standards",href:"https://www.openzeppelin.com/"},
+  {name:"RACCOONHOOD",detail:"Robinhood NFT collection",href:"https://raccoonhood.wtf/"},
+  {name:"Script Kiddies",detail:"Robinhood NFT collection",href:"https://scriptkiddies.com/"},
+  {name:"Robacha Capsules",detail:"Robinhood NFT collection",href:"https://www.robacha.fun/marketplace"},
+  {name:"The Robin Hood",detail:"Robinhood NFT collection",href:"https://opensea.io/collection/therobinhood/overview"},
 ] as const;
 const auraX=process.env.NEXT_PUBLIC_AURA_X_URL||"https://x.com/RbAuramint";
 const industryCases=[
