@@ -71,7 +71,8 @@ test("homepage communicates the Robinhood-native product and OpenSea handoff", a
   assert.match(html, /Script Kiddies/);
   assert.match(html, /Robacha Capsules/);
   assert.match(html, /The Robin Hood/);
-  assert.doesNotMatch(html, /BRANDS USING AURA|NFT brands using AURA/);
+  assert.match(html, /NFT brands using AURA/);
+  assert.doesNotMatch(html, /BRANDS USING AURA/);
 });
 
 test("audit page presents contract security controls without pending audit messaging", async () => {

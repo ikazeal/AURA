@@ -61,7 +61,7 @@ export default function Home(){
     </section>
 
     <section className="ecosystem-strip">
-      <header><div><span>RECENT ON ROBINHOOD CHAIN</span><h2>New NFT collections across the ecosystem</h2></div></header>
+      <header><div><span>RECENT ON ROBINHOOD CHAIN</span><h2>NFT brands using AURA</h2></div></header>
       <div className="ecosystem-window"><div className="ecosystem-track">{[0,1,2,3,4].map(group=><div className="ecosystem-group" key={group} aria-hidden={group>0}>{industryProjects.map(item=><a href={item.url} target="_blank" rel="noreferrer" key={`${item.name}-${group}`}><img src={item.image} alt=""/><span><b>{item.name}</b><small>{item.category} · {item.count}</small></span><i>↗</i></a>)}</div>)}</div></div>
     </section>
 
