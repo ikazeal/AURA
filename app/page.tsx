@@ -43,8 +43,8 @@ export default function Home(){
       <div className="hero-energy" aria-hidden="true">{Array.from({length:7},(_,i)=><i key={i}/>)}</div>
       <div className="hero-copy">
         <span className="hero-pill"><i/> ROBINHOOD CHAIN-NATIVE · GENERATIVE NFT AI</span>
-        <h1>为 Robinhood Chain 而生的<br/><em>生成式 NFT AI 引擎。</em></h1>
-        <p>AURA 致力于打造<strong>首个基于 Robinhood Chain 的 NFT 图片 AI 产品</strong>。上传一张主体照片，即可快速批量生成多张<strong>身份一致、视觉各异</strong>的 NFT 图片，并完成 Trait、IPFS Metadata 与 <strong>Mainnet Mint</strong>；上链后可在 <strong>OpenSea</strong> 展示、挂牌与交易。</p>
+        <h1>首个基于 Robinhood Chain 的<br/><em>AI 图片平台。</em></h1>
+        <p>描述或上传一个主体，批量生成<strong>身份一致、视觉各异</strong>的 NFT 视觉；自动完成 Metadata、IPFS 与 Mainnet Mint，并可在 OpenSea 展示和交易。</p>
         <div className="hero-action-row"><div className="hero-buttons"><a href="/studio">创建 NFT Collection <b>→</b></a><a className="hero-secondary" href="/how-it-works">查看技术架构 <b>→</b></a></div><div className="hero-mini-metrics" aria-label="AURA 使用数据"><span><b>200<sup>+</sup></b><small>早期使用者</small></span><i/><span><b>4</b><small>生态集成</small></span></div></div>
         <div className="hero-facts"><span><b>01</b> Robinhood 原生</span><span><b>02</b> AURA V2 合约</span><span><b>03</b> OpenSea Ready</span></div>
       </div>

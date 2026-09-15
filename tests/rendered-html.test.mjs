@@ -60,7 +60,7 @@ test("homepage communicates the Robinhood-native product and OpenSea handoff", a
   const response = await render("/");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /首个基于 Robinhood Chain 的 NFT 图片 AI 产品/);
+  assert.match(html, /首个基于 Robinhood Chain 的[\s\S]*AI 图片平台/);
   assert.match(html, /ROBINHOOD CHAIN-NATIVE · GENERATIVE NFT AI/);
   assert.match(html, /OpenSea Ready/);
   assert.match(html, /展示、挂牌与二级交易/);
@@ -210,6 +210,8 @@ test("the interface defaults to English and keeps the studio layout in normal fl
   assert.match(layout, /<LanguageProvider>/);
   assert.match(language, /useState<AuraLanguage>\("en"\)/);
   assert.match(language, /aura-language/);
+  assert.match(language, /if\(node\.nodeValue!==translated\)node\.nodeValue=translated/);
+  assert.doesNotMatch(language, /\["张"," images"\]/);
   assert.match(header, /className="language-toggle"/);
   assert.match(header, /className="mobile-menu-toggle"/);
   assert.match(css, /\.studio-steps\{top:auto!important;z-index:2\}/);

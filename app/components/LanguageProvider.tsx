@@ -140,6 +140,70 @@ const exact:Record<string,string>={
   "路线图":"Roadmap",
   "目录":"Contents",
   "体验创作引擎":"Launch the creation engine",
+  "首个基于 Robinhood Chain 的":"The first AI image platform",
+  "AI 图片平台。":"built on Robinhood Chain.",
+  "AURA 是首个基于 Robinhood Chain 的 AI 图片平台。":"AURA is the first AI image platform built on Robinhood Chain.",
+  "描述或上传一个主体，批量生成":"Describe or upload one subject to generate ",
+  "的 NFT 视觉；自动完成 Metadata、IPFS 与 Mainnet Mint，并可在 OpenSea 展示和交易。":" NFT visuals. Complete Metadata, IPFS and Mainnet Mint, then display or trade on OpenSea.",
+  "AURA V2 合约":"AURA V2 contract",
+  "上传一张照片":"Upload one image",
+  "锁定角色、产品或 IP 主体":"Lock a character, product or IP",
+  "单次输出多张相似但不重复的变体":"Generate multiple distinct variants per batch",
+  "轻量图片、IPFS Metadata 与钱包签名":"Optimized images, IPFS Metadata and wallet signature",
+  "展示、挂牌与二级交易":"Display, list and trade",
+  "展示 / 挂牌 / 交易":"Display / list / trade",
+  "生成我的系列":"Generate my collection",
+  "01 · 主体输入":"01 · Subject",
+  "02 · 系列参数":"02 · Collection direction",
+  "1 张":"1 image",
+  "2 张":"2 images",
+  "3 张":"3 images",
+  "4 张":"4 images",
+  "创建第一个系列":"Create your first collection",
+  "单张等待、主体走样、文件过大":"slow one-by-one output, subject drift and oversized files",
+  "主体一致，不会越生成越走样":"Consistent identity across every output",
+  "锁定脸部、轮廓、Logo 与关键结构，只让背景、服装、材质和配件发生变化。":"Preserve facial features, silhouette, logos and defining structure while varying backgrounds, outfits, materials and accessories.",
+  "规模化生成，不必手工组合图层":"Scale without manual layer assembly",
+  "从几十张概念验证扩展至上千张系列，同时控制属性分布与稀有度。":"Move from early concepts to large collections while controlling trait distribution and rarity.",
+  "图片和元数据同步完成":"Images and Metadata stay in sync",
+  "为每件作品生成名称、编号、属性和标准 JSON，减少发行前的重复整理。":"Generate names, token numbers, traits and standard JSON for every item.",
+  "直接衔接 Robinhood Chain":"Native Robinhood Chain publishing",
+  "生成、筛选、导出、连接钱包和系列展示集中在一套流程中。":"Generate, review, export, connect a wallet and publish from one workflow.",
+  "上千种可能。":"Thousands of possibilities.",
+  "冰川能量精灵":"Glacier Wisp",
+  "花园能量精灵":"Garden Wisp",
+  "霓虹能量精灵":"Neon Wisp",
+  "鎏金能量精灵":"Gilded Wisp",
+  "冰川":"Glacier ",
+  "花园":"Garden ",
+  "霓虹":"Neon ",
+  "鎏金":"Gilded ",
+  "能量精灵":"Wisp",
+  "4 个方向，仅为概念预览":"Four directions shown as a concept preview",
+  "由同一主体继续组合场景、材质与稀有属性，可扩展为 1,000 / 3,333 / 10,000 件完整系列。":"Combine scenes, materials and rarity traits around one subject to expand into a complete 1,000, 3,333 or 10,000 item collection.",
+  "生成式身份":"Generative identity",
+  "点击查看数据":"View data",
+  "累计销售额":"Lifetime sales",
+  "NFT IP 与社区":"NFT IP & community",
+  "历史成交额":"Historical volume",
+  "生成式头像与会员社区":"Generative PFP & membership",
+  "累计成交额":"Lifetime volume",
+  "用统一的像素角色系统和稀有属性，建立了可识别的互联网原生文化符号。":"A consistent pixel-character system and rarity model created a recognizable internet-native cultural icon.",
+  "从链上角色扩展到社区、授权、实体玩具和 Pudgy World，让 NFT 成为长期 IP 入口。":"Expanded from onchain characters into community, licensing, physical toys and Pudgy World.",
+  "以 10,000 个独特头像建立会员身份、社区文化与持有者权益，是生成式 PFP 进入主流的代表案例。":"Built membership, culture and holder utility around 10,000 distinct avatars.",
+  "可验证的所有权、身份关系与可持续使用方式":"verifiable ownership, identity and durable utility",
+  "每件作品拥有独立编号、链上记录和持有地址，来源与归属更容易验证。":"Every work has a unique token ID, onchain record and owner address.",
+  "限量数字艺术、创作者证书":"limited digital art and creator certificates",
+  "NFT 可以作为会员凭证，解锁内容、活动、投票或专属产品。":"NFTs can act as membership credentials for content, events, voting and exclusive products.",
+  "会员通行证、游戏角色身份":"membership passes and game identities",
+  "统一角色系列可以继续进入玩具、服饰、游戏与品牌授权场景。":"A coherent character system can extend into toys, apparel, games and brand licensing.",
+  "Pudgy Penguins 的实体玩具":"Pudgy Penguins physical toys",
+  "项目方可以围绕持有状态持续发放权益、更新属性和连接新体验。":"Projects can deliver ongoing utility, evolve traits and connect new experiences to ownership.",
+  "动态属性、持有者任务与奖励":"dynamic traits, holder quests and rewards",
+  "AURA 自动准备图片、Trait、稀有度与标准 JSON Metadata，并通过 V2 合约在 Robinhood Mainnet 完成 Mint。交易确认后，用户可在 OpenSea 连接同一钱包，完成系列展示、挂牌、报价与二级交易。":"AURA prepares images, traits, rarity and standard JSON Metadata, then mints through the V2 contract on Robinhood Mainnet. After confirmation, use the same wallet on OpenSea to display, list and trade the collection.",
+  "从创意主体到链上 Collection。生成、整理 Metadata，并在 Robinhood Chain 完成发行。":"From a creative subject to an onchain collection—generate, structure Metadata and publish on Robinhood Chain.",
+  "GitHub · 即将开放":"GitHub · coming soon",
+  "X · 即将开放":"X · coming soon",
 };
 
 const phrases:Array<[string,string]>=[
@@ -168,6 +232,16 @@ const phrases:Array<[string,string]>=[
   ["主体保持一致，背景、服装、材质与稀有属性持续变化。","Keep the subject consistent while backgrounds, outfits, materials and rarity traits evolve."],
   ["以下为行业公开案例，并非 AURA 客户案例。","Public industry references; not AURA customer case studies."],
   ["AURA 是独立产品，非 Robinhood 官方产品或合作方。","AURA is an independent product and is not affiliated with Robinhood."],
+  ["查看审计与部署证明","View audit & deployment proof"],
+  ["创建第一个系列","Create your first collection"],
+  ["生成我的系列","Generate my collection"],
+  ["点击查看数据","View data"],
+  ["浏览 OpenSea 上的 Robinhood NFT","Explore Robinhood NFTs on OpenSea"],
+  ["限量数字艺术、创作者证书","limited digital art and creator certificates"],
+  ["会员通行证、游戏角色身份","membership passes and game identities"],
+  ["Pudgy Penguins 的实体玩具","Pudgy Penguins physical toys"],
+  ["动态属性、持有者任务与奖励","dynamic traits, holder quests and rewards"],
+  ["展示 / 挂牌 / 交易","Display / list / trade"],
   ["例如：","Example: "],
   ["正在连接…","Connecting…"],
   ["引擎暂不可用","Engine unavailable"],
@@ -182,7 +256,6 @@ const phrases:Array<[string,string]>=[
   ["出售价格、版税与成交由第三方市场规则及钱包签名决定，AURA 不托管资产。","Pricing, royalties and sales are governed by third-party marketplaces and wallet signatures. AURA never takes custody of assets."],
   ["件 NFT"," NFTs"],
   ["张系列图片"," collection images"],
-  ["张"," images"],
 ];
 
 function toEnglish(value:string){
@@ -224,12 +297,13 @@ export function LanguageProvider({children}:{children:React.ReactNode}){
         if(!parent||parent.closest("script,style,pre,code"))continue;
         if(!originals.has(node))originals.set(node,node.nodeValue||"");
         const original=originals.get(node)||"";
-        node.nodeValue=language==="en"?toEnglish(original):original;
+        const translated=language==="en"?toEnglish(original):original;
+        if(node.nodeValue!==translated)node.nodeValue=translated;
       }
       const elements=root.nodeType===Node.ELEMENT_NODE?[root as Element,...Array.from((root as Element).querySelectorAll("[placeholder],[aria-label],[title]"))]:[];
       for(const el of elements){
         let stored=attrs.get(el);if(!stored){stored=new Map();attrs.set(el,stored)}
-        for(const name of ["placeholder","aria-label","title"]){const value=el.getAttribute(name);if(value!==null&&!stored.has(name))stored.set(name,value);const original=stored.get(name);if(original!==undefined)el.setAttribute(name,language==="en"?toEnglish(original):original)}
+        for(const name of ["placeholder","aria-label","title"]){const value=el.getAttribute(name);if(value!==null&&!stored.has(name))stored.set(name,value);const original=stored.get(name);if(original!==undefined){const translated=language==="en"?toEnglish(original):original;if(el.getAttribute(name)!==translated)el.setAttribute(name,translated)}}
       }
       translating=false;
     };
